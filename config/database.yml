@@ -1,0 +1,22 @@
+default: &default
+  adapter: postgresql
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  database: myapp_development
+  username: postgres
+  password: example
+
+test:
+  <<: *default
+  database: myapp_test
+  username: postgres
+  password: example
+
+production:
+  <<: *default
+  database: myapp_production
+  username: postgres
+  password: example
