@@ -20,7 +20,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_24_210152) do
     t.date "fim_vigencia", null: false
     t.decimal "importancia_segurada", precision: 15, scale: 2, null: false
     t.decimal "lmg", precision: 15, scale: 2, null: false
-    t.string "status", null: false
+    t.string "status"
   end
 
   create_table "tb_endossos", primary_key: "numero", force: :cascade do |t|
