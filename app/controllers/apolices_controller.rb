@@ -36,15 +36,19 @@ class ApolicesController < ApplicationController
   end
 
 
+
   def endossos_create
-    begin
+    if endosso_params[:tipo_endosso] == "cancelamento"
+      cancelamento = EndossoCancellationService.new(apolice: @apolice).call
+      render json: cancelamento, status: :created
+    else
       endosso = EndossoCreator.new(apolice: @apolice, params: endosso_params).call
       render json: endosso, status: :created
-    rescue ActiveRecord::RecordInvalid => e
-      render json: { erros: e.record.errors.to_hash }, status: :unprocessable_entity
-    rescue => e
-      render json: { erros: { base: e.message } }, status: :unprocessable_entity
     end
+  rescue ActiveRecord::RecordInvalid => e
+    render json: { erros: e.record.errors.to_hash }, status: :unprocessable_entity
+  rescue StandardError => e
+    render json: { erros: { base: e.message } }, status: :unprocessable_entity
   end
 
   def endossos_show
@@ -70,6 +74,6 @@ class ApolicesController < ApplicationController
   end
 
   def endosso_params
-    params.require(:endosso).permit(:importancia_segurada, :fim_vigencia, :data_emissao)
+    params.require(:endosso).permit(:importancia_segurada, :fim_vigencia, :data_emissao, :tipo_endosso)
   end
 end

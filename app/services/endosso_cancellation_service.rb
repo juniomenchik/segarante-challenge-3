@@ -3,15 +3,13 @@ class EndossoCancellationService
     @apolice = apolice
   end
 
-  def call(data_emissao:)
+  def call
     ActiveRecord::Base.transaction do
       alvo = ultimo_endosso_cancellable!
       cancelamento = Endosso.create!(
         apolice: @apolice,
         tipo_endosso: EndossoCreator::TIPOS[:cancelamento],
-        data_emissao: data_emissao,
-        fim_vigencia: alvo.fim_vigencia,
-        importancia_segurada: alvo.importancia_segurada,
+        data_emissao: Date.today,
         cancelado_endosso_numero: alvo.numero
       )
       recalcular_estado!
@@ -25,27 +23,33 @@ class EndossoCancellationService
     e = @apolice.endossos
                 .nao_cancelamentos
                 .select { |x| !x.cancelado? }
-                .max_by { |x| [x.data_emissao, x.numero] }
+                .max_by { |x| x.created_at }
     raise ActiveRecord::RecordNotFound, "Sem endosso válido para cancelar" unless e
     e
   end
 
+
   def recalcular_estado!
-    validos = @apolice.endossos
-                      .nao_cancelamentos
-                      .reject(&:cancelado?)
-                      .sort_by { |x| [x.data_emissao, x.numero] }
-    if validos.empty?
-      # Volta para o estado original gravado na própria apólice (assumindo que já reflete último snapshot antes de qualquer endosso)
-      # Se expirado, BAIXADA.
-      status = Date.today <= @apolice.fim_vigencia ? "ATIVA" : "BAIXADA"
-      @apolice.update!(lmg: @apolice.importancia_segurada, status: status)
-    else
-      ultimo = validos.last
+    ultimo_endosso = @apolice.endossos
+                             .where.not(tipo_endosso: EndossoCreator::TIPOS[:cancelamento])
+                             .where.not(numero: Endosso.where(tipo_endosso: EndossoCreator::TIPOS[:cancelamento])
+                                                       .select(:cancelado_endosso_numero))
+                             .order(created_at: :desc)
+                             .first
+
+    if ultimo_endosso
       @apolice.aplicar_snapshot!(
-        snapshot_is: ultimo.importancia_segurada,
-        snapshot_fim_vigencia: ultimo.fim_vigencia
+        snapshot_is: ultimo_endosso.importancia_segurada,
+        snapshot_fim_vigencia: ultimo_endosso.fim_vigencia
+      )
+    else
+      @apolice.update!(
+        fim_vigencia: @apolice.inicio_vigencia,
+        importancia_segurada: 0,
+        lmg: 0,
+        status: "BAIXADA"
       )
     end
   end
+
 end

@@ -4,13 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4a5d11b-3059-4238-a68a-13eb30e16bbe" name="Changes" comment="[master] Tratando eventuais problemas do endosso enviado.">
+    <list default="true" id="a4a5d11b-3059-4238-a68a-13eb30e16bbe" name="Changes" comment="[master] Faltando apenas a lógica de cancelamento de endosso.">
+      <change afterPath="$PROJECT_DIR$/app/repository/apolice_repository.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/repository/endosso_repository.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/apolices_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/apolices_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/apolice.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/apolice.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/endosso.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/endosso.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/endosso_cancellation_service.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/endosso_cancellation_service.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/services/endosso_creator.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/endosso_creator.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/migrate/20251024210125_create_tb_apolices.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20251024210125_create_tb_apolices.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/migrate/20251024210152_create_tb_endossos.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20251024210152_create_tb_endossos.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/schema.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/schema.rb" afterDir="false" />
     </list>
@@ -46,6 +47,8 @@
   "keyToString": {
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Notification.DisplayName-DoNotAsk-DatabaseConfigFileWatcher.found": "New/updated database configurations found",
+    "Notification.DoNotAsk-DatabaseConfigFileWatcher.found": "true",
     "Rails.segarante-challenge-3.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
@@ -53,6 +56,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "com.intellij.lang.ruby.rbs.tools.collection.workspace.sync.RbsCollectionUpdateProjectActivity#LAST_UPDATE_TIMESTAMP": "1761414995805",
     "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/git/segarante-challenge-3/app/repository",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
@@ -60,6 +64,9 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\git\segarante-challenge-3\app\repository" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\git\segarante-challenge-3\app\models" />
     </key>
@@ -152,14 +159,15 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="[master] Tratando eventuais problemas do endosso enviado." />
-    <option name="LAST_COMMIT_MESSAGE" value="[master] Tratando eventuais problemas do endosso enviado." />
+    <MESSAGE value="[master] Faltando apenas a lógica de cancelamento de endosso." />
+    <option name="LAST_COMMIT_MESSAGE" value="[master] Faltando apenas a lógica de cancelamento de endosso." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/app/services/endosso_creator.rb</url>
-          <line>58</line>
+          <line>73</line>
           <properties myBlockOrdinal="-1">
             <option name="block-ordinal" value="-1" />
           </properties>
@@ -167,16 +175,24 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/app/controllers/apolices_controller.rb</url>
-          <line>40</line>
+          <line>26</line>
           <properties myBlockOrdinal="-1">
             <option name="block-ordinal" value="-1" />
           </properties>
-          <option name="timeStamp" value="23" />
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/app/controllers/apolices_controller.rb</url>
+          <line>22</line>
+          <properties myBlockOrdinal="-1">
+            <option name="block-ordinal" value="-1" />
+          </properties>
+          <option name="timeStamp" value="31" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/segarante_challenge_3@segarante_challenge_3.rcov" NAME="segarante-challenge-3 Coverage Results" MODIFIED="1761421751475" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
+    <SUITE FILE_PATH="coverage/segarante_challenge_3@segarante_challenge_3.rcov" NAME="segarante-challenge-3 Coverage Results" MODIFIED="1761427117543" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
   </component>
 </project>

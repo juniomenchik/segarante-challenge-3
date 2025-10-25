@@ -6,6 +6,7 @@ class Endosso < ApplicationRecord
   belongs_to :cancelado_endosso, class_name: "Endosso", foreign_key: "cancelado_endosso_numero", optional: true
 
   scope :nao_cancelamentos, -> { where.not(tipo_endosso: "cancelamento") }
+  scope :nao_bases, -> { where.not(tipo_endosso: "BASE") }
   scope :cancelamentos, -> { where(tipo_endosso: "cancelamento") }
 
   validates :data_emissao, :tipo_endosso, presence: true

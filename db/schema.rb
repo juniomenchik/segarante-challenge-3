@@ -30,6 +30,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_24_210152) do
     t.integer "cancelado_endosso_numero"
     t.date "fim_vigencia"
     t.decimal "importancia_segurada", precision: 15, scale: 2
+    t.datetime "created_at", null: false
   end
 
   add_foreign_key "tb_endossos", "tb_apolices", column: "tb_apolice_numero", primary_key: "numero"

@@ -19,6 +19,10 @@ class EndossoCreator
 
     raise "A apólice está baixada." if @apolice.status == "BAIXADA"
 
+    if @apolice.endossos.empty?
+      create_base_endosso
+    end
+
     ActiveRecord::Base.transaction do
       tipo = determinar_tipo
       endosso = Endosso.create!(
@@ -26,7 +30,8 @@ class EndossoCreator
         tipo_endosso: tipo,
         data_emissao: @data_emissao || Date.current,
         fim_vigencia: @novo_fim,
-        importancia_segurada: @nova_is
+        importancia_segurada: @nova_is,
+        created_at: Time.current
       )
       @apolice.aplicar_snapshot!(
         snapshot_is: endosso.importancia_segurada,
@@ -37,6 +42,16 @@ class EndossoCreator
   end
 
   private
+
+  def create_base_endosso
+    Endosso.create!(
+      apolice: @apolice,
+      tipo_endosso: "BASE",
+      fim_vigencia: @apolice.fim_vigencia,
+      data_emissao: @data_emissao || Date.current,
+      created_at: Time.current
+    )
+  end
 
   def determinar_tipo
 
