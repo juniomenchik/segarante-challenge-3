@@ -13,13 +13,30 @@ class Apolice < ApplicationRecord
   validate :vigencias_validas
   validate :inicio_max_30_dias
 
+  def lmg_positivo?(new_lmg)
+    new_lmg > 0
+  end
+
   def aplicar_snapshot!(snapshot_is:, snapshot_fim_vigencia:)
-    update!(
-      importancia_segurada: snapshot_is,
-      fim_vigencia: snapshot_fim_vigencia,
-      lmg: snapshot_is,
-      status: cobertura_ativa?(snapshot_fim_vigencia) ? "ATIVA" : "BAIXADA"
-    )
+
+    if snapshot_fim_vigencia != nil
+      update!(
+        fim_vigencia: snapshot_fim_vigencia,
+        status: cobertura_ativa?(snapshot_fim_vigencia) ? "ATIVA" : "BAIXADA"
+      )
+    end
+
+    if snapshot_is != nil
+
+      new_lmg = lmg + snapshot_is
+
+      update!(
+        # importancia_segurada: snapshot_is,  DEVO ATUALIZAR O IS ORIGINAL ?
+        lmg: lmg_positivo?(new_lmg)    ? new_lmg : lmg,
+        status: lmg_positivo?(new_lmg) ? "ATIVA" : "BAIXADA"
+      )
+    end
+
   end
 
   def cobertura_ativa?(fim)
@@ -29,11 +46,11 @@ class Apolice < ApplicationRecord
   private
 
   def vigencias_validas
-    errors.add(:fim_vigencia, "fim antes do início") if fim_vigencia < inicio_vigencia
+    errors.add(:fim_vigencia, "Não deve ser anterior ao Inicio.") if fim_vigencia < inicio_vigencia
   end
 
   def inicio_max_30_dias
     return if (inicio_vigencia - data_emissao).abs <= 30
-    errors.add(:inicio_vigencia, "diferença maior que 30 dias da emissão")
+    errors.add(:inicio_vigencia, "O inicio da vigência pode ser no passado ou no futuro da data de emissão em no maximo 30 dias.")
   end
 end

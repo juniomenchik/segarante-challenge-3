@@ -20,7 +20,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_24_210152) do
     t.date "fim_vigencia", null: false
     t.decimal "importancia_segurada", precision: 15, scale: 2, null: false
     t.decimal "lmg", precision: 15, scale: 2, null: false
-    t.string "status"
+    t.string "status", null: false
   end
 
   create_table "tb_endossos", primary_key: "numero", force: :cascade do |t|
@@ -28,8 +28,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_24_210152) do
     t.string "tipo_endosso", null: false
     t.date "data_emissao", null: false
     t.integer "cancelado_endosso_numero"
-    t.date "fim_vigencia", null: false
-    t.decimal "importancia_segurada", precision: 15, scale: 2, null: false
+    t.date "fim_vigencia"
+    t.decimal "importancia_segurada", precision: 15, scale: 2
   end
 
   add_foreign_key "tb_endossos", "tb_apolices", column: "tb_apolice_numero", primary_key: "numero"

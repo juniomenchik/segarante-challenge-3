@@ -6,8 +6,8 @@ class CreateTbEndossos < ActiveRecord::Migration[7.1]
       t.string :tipo_endosso, null: false
       t.date :data_emissao, null: false
       t.integer :cancelado_endosso_numero
-      t.date :fim_vigencia, null: false
-      t.decimal :importancia_segurada, precision: 15, scale: 2, null: false
+      t.date :fim_vigencia
+      t.decimal :importancia_segurada, precision: 15, scale: 2
     end
 
     # Relação com apólice (foreign key)

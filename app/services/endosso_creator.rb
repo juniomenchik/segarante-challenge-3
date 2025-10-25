@@ -16,16 +16,22 @@ class EndossoCreator
   end
 
   def call
+
+    raise "A apólice está baixada." if @apolice.status == "BAIXADA"
+
     ActiveRecord::Base.transaction do
       tipo = determinar_tipo
       endosso = Endosso.create!(
         apolice: @apolice,
         tipo_endosso: tipo,
-        data_emissao: @data_emissao,
+        data_emissao: @data_emissao || Date.current,
         fim_vigencia: @novo_fim,
         importancia_segurada: @nova_is
       )
-      aplicar_snapshot_apolice!(endosso) unless tipo == TIPOS[:cancelamento]
+      @apolice.aplicar_snapshot!(
+        snapshot_is: endosso.importancia_segurada,
+        snapshot_fim_vigencia: endosso.fim_vigencia
+      ) unless tipo == TIPOS[:cancelamento]
       endosso
     end
   end
@@ -35,13 +41,16 @@ class EndossoCreator
   def determinar_tipo
 
     fim_atual = @apolice.fim_vigencia
-    mudou_fim = @novo_fim != fim_atual
 
-    return TIPOS[:aumento_is_alteracao_vigencia] if mudou_fim && @nova_is > 0
-    return TIPOS[:reducao_is_alteracao_vigencia] if mudou_fim && @nova_is < 0
+    if @novo_fim != nil
+      mudou_fim = @novo_fim != fim_atual
+      return TIPOS[:aumento_is_alteracao_vigencia] if mudou_fim && @nova_is > 0
+      return TIPOS[:reducao_is_alteracao_vigencia] if mudou_fim && @nova_is < 0
+      return TIPOS[:alteracao_vigencia] if mudou_fim
+    end
+
     return TIPOS[:aumento_is] if @nova_is > 0
     return TIPOS[:reducao_is] if @nova_is < 0
-    return TIPOS[:alteracao_vigencia] if mudou_fim
 
     raise ActiveRecord::RecordInvalid.new(@apolice), "Nada mudou"
   end

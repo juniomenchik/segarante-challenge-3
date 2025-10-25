@@ -9,13 +9,13 @@ class ApolicesController < ApplicationController
       render json: apolice, status: :created
     else
       if apolice.errors.added?(:numero, :taken)
-        render json: { erro: "numero de policie ja existe." }, status: :conflict
+        render json: { erros: { numero: "numero de policie ja existe." } }, status: :conflict
       else
-        render json: { erro: apolice.errors.full_messages }, status: :unprocessable_entity
+        render json: { erros: apolice.errors.to_hash }, status: :unprocessable_entity
       end
     end
   rescue ActiveRecord::RecordNotUnique
-    render json: { erro: "numero de policie ja existe." }, status: :conflict
+    render json: { erros: { numero: "numero de policie ja existe." } }, status: :conflict
   end
 
 
@@ -35,21 +35,34 @@ class ApolicesController < ApplicationController
     render json: @apolice.endossos.order(:data_emissao, :numero)
   end
 
+
   def endossos_create
-    endosso = EndossoCreator.new(apolice: @apolice, params: endosso_params).call
-    render json: endosso, status: :created
+    begin
+      endosso = EndossoCreator.new(apolice: @apolice, params: endosso_params).call
+      render json: endosso, status: :created
+    rescue ActiveRecord::RecordInvalid => e
+      render json: { erros: e.record.errors.to_hash }, status: :unprocessable_entity
+    rescue => e
+      render json: { erros: { base: e.message } }, status: :unprocessable_entity
+    end
   end
 
   def endossos_show
-    endosso = @apolice.endossos.find(params[:endosso_id])
-    render json: endosso
+    endosso = Endosso.find_by(numero: params[:endosso_id])
+    if endosso
+      render json: endosso
+    else
+      render json: { erro: "Endosso não encontrado" }, status: :not_found
+    end
   end
 
   private
 
   def set_apolice
     @apolice = Apolice.find_by(numero: params[:id])
-    render json: { erro: "Nao foi encontrada" }, status: :not_found unless @apolice
+    @endosso  = Endosso.find_by(numero: params[:endosso_id])
+
+    render json: { erro: "Nao foi encontrada" }, status: :not_found unless @apolice || @endosso
   end
 
   def apolice_params

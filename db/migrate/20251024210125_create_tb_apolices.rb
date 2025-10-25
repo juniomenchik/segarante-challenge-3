@@ -7,7 +7,7 @@ class CreateTbApolices < ActiveRecord::Migration[7.1]
       t.date :fim_vigencia, null: false
       t.decimal :importancia_segurada, precision: 15, scale: 2, null: false
       t.decimal :lmg, precision: 15, scale: 2, null: false
-      t.string :status
+      t.string :status, null: false
     end
   end
 end

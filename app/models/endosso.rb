@@ -8,25 +8,12 @@ class Endosso < ApplicationRecord
   scope :nao_cancelamentos, -> { where.not(tipo_endosso: "cancelamento") }
   scope :cancelamentos, -> { where(tipo_endosso: "cancelamento") }
 
-  validates :data_emissao, :tipo_endosso, :fim_vigencia, :importancia_segurada, presence: true
+  validates :data_emissao, :tipo_endosso, presence: true
   before_validation :set_data_emissao_hoje, if: -> { data_emissao.nil? }
-  validate :fim_nao_antes_inicio_original
-  validate :nao_negativo
 
   def cancelado?
     Endosso.where(cancelado_endosso_numero: numero).exists?
   end
 
-  private
-
-  def fim_nao_antes_inicio_original
-    return if fim_vigencia.nil?
-    if fim_vigencia < apolice.inicio_vigencia
-      errors.add(:fim_vigencia, "fim antes do início da apólice")
-    end
-  end
-
-  def nao_negativo
-    errors.add(:importancia_segurada, "negativa") if importancia_segurada.to_d < 0
-  end
 end
+
