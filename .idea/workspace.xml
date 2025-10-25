@@ -4,16 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4a5d11b-3059-4238-a68a-13eb30e16bbe" name="Changes" comment="[master] Faltando apenas a lógica de cancelamento de endosso.">
-      <change afterPath="$PROJECT_DIR$/app/repository/apolice_repository.rb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/repository/endosso_repository.rb" afterDir="false" />
+    <list default="true" id="a4a5d11b-3059-4238-a68a-13eb30e16bbe" name="Changes" comment="[master] Lógica feita de forma completa. Iniciando melhoria na estrutura do projeto.">
+      <change afterPath="$PROJECT_DIR$/app/services/endosso_service.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/exception_service.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/apolices_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/apolices_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/apolice.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/apolice.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/dto/apolice_dto.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/dto/apolice_dto.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/dto/endosso_dto.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/dto/endosso_dto.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/endosso.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/endosso.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/endosso_cancellation_service.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/endosso_cancellation_service.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/endosso_creator.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/endosso_creator.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/migrate/20251024210152_create_tb_endossos.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20251024210152_create_tb_endossos.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/schema.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/schema.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/vo/apolice_vo.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/vo/apolice_vo.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/vo/endosso_vo.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/vo/endosso_vo.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/repository/apolice_repository.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/apolice_repository.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/repository/endosso_repository.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/endosso_repository.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/apolice_service.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/apolice_service.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +60,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "com.intellij.lang.ruby.rbs.tools.collection.workspace.sync.RbsCollectionUpdateProjectActivity#LAST_UPDATE_TIMESTAMP": "1761414995805",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/git/segarante-challenge-3/app/repository",
+    "last_opened_file_path": "C:/git/segarante-challenge-3/app/services",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
@@ -65,9 +69,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\git\segarante-challenge-3\app\services" />
       <recent name="C:\git\segarante-challenge-3\app\repository" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\git\segarante-challenge-3\app\models\vo" />
       <recent name="C:\git\segarante-challenge-3\app\models" />
     </key>
   </component>
@@ -160,7 +166,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="[master] Tratando eventuais problemas do endosso enviado." />
     <MESSAGE value="[master] Faltando apenas a lógica de cancelamento de endosso." />
-    <option name="LAST_COMMIT_MESSAGE" value="[master] Faltando apenas a lógica de cancelamento de endosso." />
+    <MESSAGE value="[master] Lógica feita de forma completa. Iniciando melhoria na estrutura do projeto." />
+    <option name="LAST_COMMIT_MESSAGE" value="[master] Lógica feita de forma completa. Iniciando melhoria na estrutura do projeto." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -172,22 +179,6 @@
             <option name="block-ordinal" value="-1" />
           </properties>
           <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/app/controllers/apolices_controller.rb</url>
-          <line>26</line>
-          <properties myBlockOrdinal="-1">
-            <option name="block-ordinal" value="-1" />
-          </properties>
-          <option name="timeStamp" value="30" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/app/controllers/apolices_controller.rb</url>
-          <line>22</line>
-          <properties myBlockOrdinal="-1">
-            <option name="block-ordinal" value="-1" />
-          </properties>
-          <option name="timeStamp" value="31" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -7,8 +7,6 @@ class Apolice < ApplicationRecord
 
   has_many :endossos, class_name: "Endosso", foreign_key: "tb_apolice_numero", inverse_of: :apolice
 
-  # enum status: { ATIVA: "ATIVA", BAIXADA: "BAIXADA" }
-
   validates :data_emissao, :inicio_vigencia, :fim_vigencia, :importancia_segurada, :lmg, presence: true
   validate :vigencias_validas
   validate :inicio_max_30_dias

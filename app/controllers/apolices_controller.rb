@@ -1,8 +1,15 @@
 class ApolicesController < ApplicationController
-  before_action :set_apolice, only: [:show, :endossos_index, :endossos_create, :endossos_show]
 
+  before_action :initialize_classes
+
+  def initialize_classes
+    @service = ApoliceService.new
+  end
 
   def create
+
+    @service.criar_apolice(apolice_params)
+
     apolice = Apolice.new(apolice_params.merge(status: "ATIVA", lmg: apolice_params[:importancia_segurada]))
 
     if apolice.save
@@ -17,7 +24,6 @@ class ApolicesController < ApplicationController
   rescue ActiveRecord::RecordNotUnique
     render json: { erros: { numero: "numero de policie ja existe." } }, status: :conflict
   end
-
 
   def index
     render json: Apolice.all
@@ -34,8 +40,6 @@ class ApolicesController < ApplicationController
   def endossos_index
     render json: @apolice.endossos.order(:data_emissao, :numero)
   end
-
-
 
   def endossos_create
     if endosso_params[:tipo_endosso] == "cancelamento"
@@ -62,18 +66,23 @@ class ApolicesController < ApplicationController
 
   private
 
-  def set_apolice
-    @apolice = Apolice.find_by(numero: params[:id])
-    @endosso  = Endosso.find_by(numero: params[:endosso_id])
-
-    render json: { erro: "Nao foi encontrada" }, status: :not_found unless @apolice || @endosso
-  end
-
   def apolice_params
-    params.require(:apolice).permit(:numero, :data_emissao, :inicio_vigencia, :fim_vigencia, :importancia_segurada, :lmg)
+    params.require(:apolice).permit(
+      :numero,
+      :data_emissao,
+      :inicio_vigencia,
+      :fim_vigencia,
+      :importancia_segurada,
+      :lmg
+    )
   end
 
   def endosso_params
-    params.require(:endosso).permit(:importancia_segurada, :fim_vigencia, :data_emissao, :tipo_endosso)
+    params.require(:endosso).permit(
+      :importancia_segurada,
+      :fim_vigencia,
+      :data_emissao,
+      :tipo_endosso
+    )
   end
 end
