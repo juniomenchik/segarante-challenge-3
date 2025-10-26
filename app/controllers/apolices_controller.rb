@@ -1,4 +1,4 @@
-class ApolicesController < ApplicationController
+class ApolicesController < ActionController::API
 
   before_action :initialize_classes
 
