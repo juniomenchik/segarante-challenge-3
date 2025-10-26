@@ -1,25 +1,14 @@
-$rails new .
-
-$rails generate migration CreateTbApolices \
-numero:primary_key \
-data_emissao:date \
-inicio_vigencia:date \
-fim_vigencia:date \
-importancia_segurada:decimal \
-lmg:decimal \
-status:string --force
+Perguntas Sobre a Lógica do Negócio.
 
 
-$rails db:migrate
+Caso for criado uma Apólice.
+    Posso cancelar um endosso ?
+        Se cancelar um endosso, e possui apenas o BASE, a apolice será BAIXADA.
 
-$rails generate migration CreateTbEndossos \
-numero:primary_key \
-tb_apolice_numero:integer \
-tipo_endosso:string \
-data_emissao:date \
-cancelado_endosso_numero:integer \
-fim_vigencia:date \
-importancia_segurada:decimal --force
+Não foi descrito explicitamente no desafio, então deixei que o usuario gerasse os IDs do endosso.
+    pois o id da Apólice é o numero, e o numero é um campo obrigatório. 
+    Porém se mandar nulo, será auto_incrementado. 
 
-
-$rails db:migrate
+Não entendi muito bem se a importancia_segurada da apolice deveria ser ou não atualizada
+    porque ela estava como "original",  e o LMG deveria "refletir" o valor da IS.
+    Então deixei que a importancia_segurada fosse atualizada junto com o LMG conforme os endossos fossem criados.

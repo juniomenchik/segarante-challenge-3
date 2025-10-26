@@ -2,21 +2,24 @@ default: &default
   adapter: postgresql
   pool: 5
   timeout: 5000
+  url: postgres://postgres:example@postgres:5432/postgres
 
 development:
   <<: *default
-  database: myapp_development
+  url: postgres://postgres:postgres@localhost:5432/postgres
+  database: postgres
   username: postgres
-  password: example
+  password: postgres
 
 test:
   <<: *default
-  database: myapp_test
+  url: postgres://postgres:postgres@localhost:5432/postgres
+  database: postgres
   username: postgres
-  password: example
+  password: postgres
 
 production:
   <<: *default
-  database: myapp_production
+  database: postgres
   username: postgres
-  password: example
+  password: postgres

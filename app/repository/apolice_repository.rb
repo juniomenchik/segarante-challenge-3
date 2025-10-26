@@ -15,6 +15,7 @@ class ApoliceRepository
                       })
 
       Endosso.create!(
+        numero: rand(100000..999999).to_s,
         apolice: apolice,
         tipo_endosso: "BASE",
         fim_vigencia: attrs.fim_vigencia,

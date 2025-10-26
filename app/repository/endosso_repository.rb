@@ -9,10 +9,14 @@ class EndossoRepository
 
       raise StandardError, "A apólice não está ativa. Não é possível criar endossos." unless apolice[:status] == "ATIVA"
 
-      endosso = attrs.tipo_endosso == "cancelamento" ? create_cancelamento(apolice, attrs) : create_normal(apolice, attrs)
-
-      apolice.aplicar_endosso(endosso)
-      endosso
+      
+      case attrs.tipo_endosso
+      when "cancelamento"
+        create_cancelamento(apolice, attrs)
+      else
+        create_normal(apolice, attrs)
+      end
+      
     end
   end
 
@@ -39,16 +43,11 @@ class EndossoRepository
       endosso
     end
   end
-
-  def update_endosso(endosso, attrs)
-    ActiveRecord::Base.transaction do
-      endosso.update!(attrs)
-      endosso
-    end
-  end
+  
 
   def create_normal(apolice, attrs)
-    Endosso.create!(
+    endosso_criado = Endosso.create!(
+      numero: attrs.numero,
       apolice: apolice,
       tipo_endosso: attrs.tipo_endosso,
       data_emissao: attrs.data_emissao,
@@ -56,55 +55,62 @@ class EndossoRepository
       importancia_segurada: attrs.importancia_segurada,
       created_at: attrs.created_at,
       )
+
+    apolice.update!(
+      fim_vigencia: attrs.fim_vigencia || apolice.fim_vigencia,
+      lmg: apolice.lmg + attrs.importancia_segurada.to_d
+    )
+
+    endosso_criado
+
+
   end
 
   def create_cancelamento(apolice, attrs)
-    # Endosso mais recente elegível para cancelamento (não é cancelamento e não já cancelado)
+
     endosso_a_cancelar = apolice.endossos
                                 .where.not(tipo_endosso: "cancelamento")
                                 .where.not(numero: apolice.endossos
                                                           .where(tipo_endosso: "cancelamento")
                                                           .select(:cancelado_endosso_numero))
                                 .order(created_at: :desc)
-                                .first
-
-    raise ActiveRecord::RecordNotFound, "Sem endosso válido para cancelar" unless endosso_a_cancelar
+                                .first || apolice.endossos.where(tipo_endosso: "BASE").order(created_at: :desc).first
 
     cancelamento = Endosso.create!(
+      numero: attrs.numero,
       apolice: apolice,
       tipo_endosso: attrs.tipo_endosso,
       data_emissao: attrs.data_emissao || Date.current,
       cancelado_endosso_numero: endosso_a_cancelar.numero
     )
 
-    ativos_restantes = apolice.endossos
-                              .where.not(tipo_endosso: "cancelamento")
-                              .where.not(numero: apolice.endossos
-                                                        .where(tipo_endosso: "cancelamento")
-                                                        .select(:cancelado_endosso_numero))
+    if endosso_a_cancelar.fim_vigencia != nil
+      previous_endosso = find_previous_endosso_que_possua_fv(apolice, endosso_a_cancelar)
+      apolice.update!(fim_vigencia: previous_endosso.fim_vigencia)
+    end
 
-    if ativos_restantes.exists?
-      ultimo_ativo = ativos_restantes.order(created_at: :desc).first
-      total_importancia = ativos_restantes.sum(:importancia_segurada)
+    if endosso_a_cancelar.importancia_segurada != nil
+      apolice.update!(lmg: apolice.lmg - endosso_a_cancelar.importancia_segurada)
+    end
 
+    if apolice.lmg <= 0 || apolice.fim_vigencia <= Date.current
       apolice.update!(
-        fim_vigencia: ultimo_ativo.fim_vigencia,
-        importancia_segurada: total_importancia,
-        lmg: total_importancia,
-        status: "ATIVA"
-      )
-    else
-      # Endosso base para recuperar fim_vigencia original (se existir)
-      endosso_base = apolice.endossos.order(created_at: :asc).first
-      apolice.update!(
-        fim_vigencia: endosso_base&.fim_vigencia || apolice.inicio_vigencia,
-        importancia_segurada: 0,
         lmg: 0,
         status: "BAIXADA"
       )
     end
 
     cancelamento
+  end
+
+  def find_previous_endosso_que_possua_fv(apolice, endosso_atual)
+    apolice.endossos
+           .where.not(tipo_endosso: "cancelamento")
+           .where.not(fim_vigencia: nil)
+           .where("created_at < ?", endosso_atual.created_at)
+           .order(created_at: :desc)
+           .first ||
+      apolice.endossos.where(tipo_endosso: "BASE").where.not(fim_vigencia: nil).order(created_at: :asc).first
   end
 
 end

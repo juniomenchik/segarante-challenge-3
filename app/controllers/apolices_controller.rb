@@ -10,7 +10,7 @@ class ApolicesController < ActionController::API
   def create
     begin
       entity = @apolice_service.criar_apolice(apolice_params)
-      render json: entity, status: :created
+      render json: NullCleaner.remove_nulls(entity), status: :created
 
     rescue StandardError => e
       render json: e.message, status: :unprocessable_entity
@@ -20,7 +20,7 @@ class ApolicesController < ActionController::API
   def index
     begin
       entities = @apolice_service.listar_apolices
-      render json: entities, status: :ok
+      render json: NullCleaner.remove_nulls(entities), status: :ok
 
     rescue StandardError => e
       render json: e.message, status: :unprocessable_entity
@@ -29,18 +29,24 @@ class ApolicesController < ActionController::API
 
   def show
     begin
+
       entity = @apolice_service.consulta_por_numero_da_apolicie(params[:id])
-      render json: entity, status: :ok
+      if entity.nil?
+        render json: { error: "Apólice Não encontrada" }, status: :not_found
+      else
+        render json: NullCleaner.remove_nulls(entity), status: :ok
+      end
 
     rescue StandardError => e
       render json: e.message, status: :unprocessable_entity
     end
+
   end
 
   def endossos_create
     begin
       entity = @endosso_service.criar_endosso(params[:id],endosso_params)
-      render json: entity, status: :ok
+      render json: NullCleaner.remove_nulls(entity), status: :created
 
     rescue StandardError => e
       render json: e.message, status: :unprocessable_entity
@@ -52,28 +58,25 @@ class ApolicesController < ActionController::API
     begin
 
       entity = @endosso_service.consultar_endossos_de_uma_apolicie_pelo_numero(params[:id])
-      render json: entity, status: :ok
+      render json: NullCleaner.remove_nulls(entity), status: :ok
 
     rescue StandardError => e
       render json: e.message, status: :unprocessable_entity
     end
 
   end
-
 
   def endossos_show
 
     begin
       entity = @endosso_service.consultar_endosso_de_apolice(params[:id], params[:endosso_id])
-      render json: entity, status: :ok
+      render json: NullCleaner.remove_nulls(entity), status: :ok
 
     rescue StandardError => e
       render json: e.message, status: :unprocessable_entity
     end
 
   end
-
-  private
 
   def apolice_params
     params.require(:apolice).permit(
@@ -89,6 +92,7 @@ class ApolicesController < ActionController::API
   def endosso_params
     params.require(:endosso).permit(
       :id,
+      :numero,
       :importancia_segurada,
       :tb_apolice_numero,
       :fim_vigencia,
