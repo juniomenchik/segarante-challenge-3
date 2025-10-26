@@ -1,0 +1,734 @@
+{
+	"info": {
+		"_postman_id": "3be61b19-9a42-4cf6-900d-382f5a83b3af",
+		"name": "Segarante Apolices Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16001297"
+	},
+	"item": [
+		{
+			"name": "Criar apólice",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Gera um número aleatório de 6 dígitos",
+							"function gerarNumeroApolice() {",
+							"    return Math.floor(100000 + Math.random() * 900000).toString();",
+							"}",
+							"",
+							"const numeroApolice = gerarNumeroApolice();",
+							"pm.environment.set('num_policy', numeroApolice);",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Captura todos os campos do corpo da resposta e salva como variáveis de ambiente",
+							"const campos = [",
+							"    \"numero\",",
+							"    \"data_emissao\",",
+							"    \"inicio_vigencia\",",
+							"    \"fim_vigencia\",",
+							"    \"importancia_segurada\",",
+							"    \"lmg\",",
+							"    \"status\",",
+							"    \"created_at\",",
+							"    \"updated_at\"",
+							"];",
+							"",
+							"let jsonData;",
+							"try {",
+							"    jsonData = pm.response.json();",
+							"} catch (e) {",
+							"",
+							"}",
+							"",
+							"if (jsonData) {",
+							"    campos.forEach(function(campo) {",
+							"        if (jsonData.hasOwnProperty(campo)) {",
+							"            pm.environment.set(campo, jsonData[campo]);",
+							"        }",
+							"    });",
+							"",
+							"}",
+							"",
+							"",
+							"let jsonDataS;",
+							"try {",
+							"    jsonDataS = pm.response.json();",
+							"    pm.environment.set(\"numero_apolice\", jsonData.numero);",
+							"} catch (e) {",
+							"",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"apolice\": {\n      \"numero\": {{num_policy}},\n      \"data_emissao\": \"2025-10-25\",\n      \"inicio_vigencia\": \"2025-11-24\",\n      \"fim_vigencia\": \"2025-12-25\",\n      \"importancia_segurada\": 1000.01,\n      \"lmg\": 1000.00\n    }\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/apolices",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"apolices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar apólices",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/apolices",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"apolices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta por número da apólice",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Extrai os campos do objeto 'apolice' e armazena em variáveis de ambiente",
+							"if (pm.response.code === 200) {",
+							"    var jsonData = pm.response.json();",
+							"    if (jsonData && jsonData.apolice) {",
+							"        var campos = [",
+							"            \"numero\",",
+							"            \"data_emissao\",",
+							"            \"inicio_vigencia\",",
+							"            \"fim_vigencia\",",
+							"            \"importancia_segurada\",",
+							"            \"lmg\",",
+							"            \"status\"",
+							"        ];",
+							"        campos.forEach(function(campo) {",
+							"            if (jsonData.apolice.hasOwnProperty(campo)) {",
+							"                pm.environment.set(campo, jsonData.apolice[campo]);",
+							"            }",
+							"        });",
+							"    }",
+							"}",
+							"",
+							"",
+							"let jsonDataS;",
+							"try {",
+							"    jsonDataS = pm.response.json();",
+							"    pm.environment.set(\"numero_apolice\", jsonData.apolice.numero);",
+							"} catch (e) {",
+							"    pm.test(\"Resposta não é um JSON válido\", function () {",
+							"        pm.expect.fail(\"Resposta não é um JSON válido\");",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/apolices/{{numero_apolice}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"apolices",
+						"{{numero_apolice}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar endosso sobre uma apólice [aumento_is]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Extrai campos do corpo da resposta e salva como variáveis de ambiente",
+							"let jsonData;",
+							"if (pm.response.code >= 200 && pm.response.code < 300) {",
+							"    try {",
+							"        jsonData = pm.response.json();",
+							"    } catch (e) {",
+							"        pm.test(\"Resposta não é um JSON válido\", function () {",
+							"            pm.expect.fail(\"Resposta não é um JSON válido\");",
+							"        });",
+							"    }",
+							"    if (jsonData) {",
+							"        const campos = [",
+							"            \"numero\",",
+							"            \"tb_apolice_numero\",",
+							"            \"tipo_endosso\",",
+							"            \"data_emissao\",",
+							"            \"cancelado_endosso_numero\",",
+							"            \"fim_vigencia\",",
+							"            \"importancia_segurada\"",
+							"        ];",
+							"        campos.forEach(function(campo) {",
+							"            if (jsonData.hasOwnProperty(campo)) {",
+							"                pm.environment.set(campo, jsonData[campo]);",
+							"            } else {",
+							"                pm.environment.unset(campo); // Remove se não existir na resposta",
+							"            }",
+							"        });",
+							"        // Preenche variáveis específicas",
+							"        if (jsonData.tb_apolice_numero !== undefined) {",
+							"            pm.environment.set(\"numero_apolice\", jsonData.tb_apolice_numero);",
+							"        }",
+							"        if (jsonData.numero !== undefined) {",
+							"            pm.environment.set(\"numero_endosso\", jsonData.numero);",
+							"        }",
+							"        // Imprime no console se as variáveis estiverem definidas",
+							"        var numeroApolice = pm.environment.get(\"numero_apolice\");",
+							"        var numeroEndosso = pm.environment.get(\"numero_endosso\");",
+							"        if (numeroApolice !== undefined) {",
+							"            console.log(\"numero_apolice:\", numeroApolice);",
+							"        }",
+							"        if (numeroEndosso !== undefined) {",
+							"            console.log(\"numero_endosso:\", numeroEndosso);",
+							"        }",
+							"    }",
+							"}",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"endosso\": {\n        \"importancia_segurada\": 500.00\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/apolices/{{numero_apolice}}/endossos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"apolices",
+						"{{numero_apolice}}",
+						"endossos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar endosso sobre uma apólice [reducao_is]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Extrai campos do corpo da resposta e salva como variáveis de ambiente",
+							"let jsonData;",
+							"if (pm.response.code >= 200 && pm.response.code < 300) {",
+							"    try {",
+							"        jsonData = pm.response.json();",
+							"    } catch (e) {",
+							"        pm.test(\"Resposta não é um JSON válido\", function () {",
+							"            pm.expect.fail(\"Resposta não é um JSON válido\");",
+							"        });",
+							"    }",
+							"    if (jsonData) {",
+							"        const campos = [",
+							"            \"numero\",",
+							"            \"tb_apolice_numero\",",
+							"            \"tipo_endosso\",",
+							"            \"data_emissao\",",
+							"            \"cancelado_endosso_numero\",",
+							"            \"fim_vigencia\",",
+							"            \"importancia_segurada\"",
+							"        ];",
+							"        campos.forEach(function(campo) {",
+							"            if (jsonData.hasOwnProperty(campo)) {",
+							"                pm.environment.set(campo, jsonData[campo]);",
+							"            } else {",
+							"                pm.environment.unset(campo); // Remove se não existir na resposta",
+							"            }",
+							"        });",
+							"        // Preenche variáveis específicas",
+							"        if (jsonData.tb_apolice_numero !== undefined) {",
+							"            pm.environment.set(\"numero_apolice\", jsonData.tb_apolice_numero);",
+							"        }",
+							"        if (jsonData.numero !== undefined) {",
+							"            pm.environment.set(\"numero_endosso\", jsonData.numero);",
+							"        }",
+							"        // Imprime no console se as variáveis estiverem definidas",
+							"        var numeroApolice = pm.environment.get(\"numero_apolice\");",
+							"        var numeroEndosso = pm.environment.get(\"numero_endosso\");",
+							"        if (numeroApolice !== undefined) {",
+							"            console.log(\"numero_apolice:\", numeroApolice);",
+							"        }",
+							"        if (numeroEndosso !== undefined) {",
+							"            console.log(\"numero_endosso:\", numeroEndosso);",
+							"        }",
+							"    }",
+							"}",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"endosso\": {\n        \"importancia_segurada\": -500.00\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/apolices/{{numero_apolice}}/endossos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"apolices",
+						"{{numero_apolice}}",
+						"endossos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar endosso sobre uma apólice [aumento_is_alteracao_vigencia]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Extrai campos do corpo da resposta e salva como variáveis de ambiente",
+							"let jsonData;",
+							"if (pm.response.code >= 200 && pm.response.code < 300) {",
+							"    try {",
+							"        jsonData = pm.response.json();",
+							"    } catch (e) {",
+							"        pm.test(\"Resposta não é um JSON válido\", function () {",
+							"            pm.expect.fail(\"Resposta não é um JSON válido\");",
+							"        });",
+							"    }",
+							"    if (jsonData) {",
+							"        const campos = [",
+							"            \"numero\",",
+							"            \"tb_apolice_numero\",",
+							"            \"tipo_endosso\",",
+							"            \"data_emissao\",",
+							"            \"cancelado_endosso_numero\",",
+							"            \"fim_vigencia\",",
+							"            \"importancia_segurada\"",
+							"        ];",
+							"        campos.forEach(function(campo) {",
+							"            if (jsonData.hasOwnProperty(campo)) {",
+							"                pm.environment.set(campo, jsonData[campo]);",
+							"            } else {",
+							"                pm.environment.unset(campo); // Remove se não existir na resposta",
+							"            }",
+							"        });",
+							"        // Preenche variáveis específicas",
+							"        if (jsonData.tb_apolice_numero !== undefined) {",
+							"            pm.environment.set(\"numero_apolice\", jsonData.tb_apolice_numero);",
+							"        }",
+							"        if (jsonData.numero !== undefined) {",
+							"            pm.environment.set(\"numero_endosso\", jsonData.numero);",
+							"        }",
+							"        // Imprime no console se as variáveis estiverem definidas",
+							"        var numeroApolice = pm.environment.get(\"numero_apolice\");",
+							"        var numeroEndosso = pm.environment.get(\"numero_endosso\");",
+							"        if (numeroApolice !== undefined) {",
+							"            console.log(\"numero_apolice:\", numeroApolice);",
+							"        }",
+							"        if (numeroEndosso !== undefined) {",
+							"            console.log(\"numero_endosso:\", numeroEndosso);",
+							"        }",
+							"    }",
+							"}",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRF-Token",
+						"value": "{{csrf_token}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"endosso\": {\n        \"importancia_segurada\": 500.00,\n        \"fim_vigencia\": \"2025-12-25\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/apolices/{{numero_apolice}}/endossos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"apolices",
+						"{{numero_apolice}}",
+						"endossos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar endosso sobre uma apólice [reducao_is_alteracao_vigencia]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Extrai campos do corpo da resposta e salva como variáveis de ambiente",
+							"let jsonData;",
+							"if (pm.response.code >= 200 && pm.response.code < 300) {",
+							"    try {",
+							"        jsonData = pm.response.json();",
+							"    } catch (e) {",
+							"        pm.test(\"Resposta não é um JSON válido\", function () {",
+							"            pm.expect.fail(\"Resposta não é um JSON válido\");",
+							"        });",
+							"    }",
+							"    if (jsonData) {",
+							"        const campos = [",
+							"            \"numero\",",
+							"            \"tb_apolice_numero\",",
+							"            \"tipo_endosso\",",
+							"            \"data_emissao\",",
+							"            \"cancelado_endosso_numero\",",
+							"            \"fim_vigencia\",",
+							"            \"importancia_segurada\"",
+							"        ];",
+							"        campos.forEach(function(campo) {",
+							"            if (jsonData.hasOwnProperty(campo)) {",
+							"                pm.environment.set(campo, jsonData[campo]);",
+							"            } else {",
+							"                pm.environment.unset(campo); // Remove se não existir na resposta",
+							"            }",
+							"        });",
+							"        // Preenche variáveis específicas",
+							"        if (jsonData.tb_apolice_numero !== undefined) {",
+							"            pm.environment.set(\"numero_apolice\", jsonData.tb_apolice_numero);",
+							"        }",
+							"        if (jsonData.numero !== undefined) {",
+							"            pm.environment.set(\"numero_endosso\", jsonData.numero);",
+							"        }",
+							"        // Imprime no console se as variáveis estiverem definidas",
+							"        var numeroApolice = pm.environment.get(\"numero_apolice\");",
+							"        var numeroEndosso = pm.environment.get(\"numero_endosso\");",
+							"        if (numeroApolice !== undefined) {",
+							"            console.log(\"numero_apolice:\", numeroApolice);",
+							"        }",
+							"        if (numeroEndosso !== undefined) {",
+							"            console.log(\"numero_endosso:\", numeroEndosso);",
+							"        }",
+							"    }",
+							"}",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRF-Token",
+						"value": "{{csrf_token}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"endosso\": {\n        \"importancia_segurada\": -500.00,\n        \"fim_vigencia\": \"2025-12-25\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/apolices/{{numero_apolice}}/endossos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"apolices",
+						"{{numero_apolice}}",
+						"endossos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar endosso  de cancelamento.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Extrai campos do corpo da resposta e salva como variáveis de ambiente\r",
+							"let jsonData;\r",
+							"if (pm.response.code >= 200 && pm.response.code < 300) {\r",
+							"    try {\r",
+							"        jsonData = pm.response.json();\r",
+							"    } catch (e) {\r",
+							"        pm.test(\"Resposta não é um JSON válido\", function () {\r",
+							"            pm.expect.fail(\"Resposta não é um JSON válido\");\r",
+							"        });\r",
+							"    }\r",
+							"    if (jsonData) {\r",
+							"        const campos = [\r",
+							"            \"numero\",\r",
+							"            \"tb_apolice_numero\",\r",
+							"            \"tipo_endosso\",\r",
+							"            \"data_emissao\",\r",
+							"            \"cancelado_endosso_numero\",\r",
+							"            \"fim_vigencia\",\r",
+							"            \"importancia_segurada\"\r",
+							"        ];\r",
+							"        campos.forEach(function(campo) {\r",
+							"            if (jsonData.hasOwnProperty(campo)) {\r",
+							"                pm.environment.set(campo, jsonData[campo]);\r",
+							"            } else {\r",
+							"                pm.environment.unset(campo); // Remove se não existir na resposta\r",
+							"            }\r",
+							"        });\r",
+							"        // Preenche variáveis específicas\r",
+							"        if (jsonData.tb_apolice_numero !== undefined) {\r",
+							"            pm.environment.set(\"numero_apolice\", jsonData.tb_apolice_numero);\r",
+							"        }\r",
+							"        if (jsonData.numero !== undefined) {\r",
+							"            pm.environment.set(\"numero_endosso\", jsonData.numero);\r",
+							"        }\r",
+							"        // Imprime no console se as variáveis estiverem definidas\r",
+							"        var numeroApolice = pm.environment.get(\"numero_apolice\");\r",
+							"        var numeroEndosso = pm.environment.get(\"numero_endosso\");\r",
+							"        if (numeroApolice !== undefined) {\r",
+							"            console.log(\"numero_apolice:\", numeroApolice);\r",
+							"        }\r",
+							"        if (numeroEndosso !== undefined) {\r",
+							"            console.log(\"numero_endosso:\", numeroEndosso);\r",
+							"        }\r",
+							"    }\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-CSRF-Token",
+						"value": "{{csrf_token}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"endosso\": {\n      \"tipo_endosso\": \"cancelamento\"\n    }\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/apolices/{{numero_apolice}}/endossos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"apolices",
+						"{{numero_apolice}}",
+						"endossos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar endossos de uma apólice",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/apolices/{{numero}}/endossos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"apolices",
+						"{{numero}}",
+						"endossos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar endosso",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/apolices/endossos/{{numero}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"apolices",
+						"endossos",
+						"{{numero}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
