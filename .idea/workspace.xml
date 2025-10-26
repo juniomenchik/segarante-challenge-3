@@ -4,37 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4a5d11b-3059-4238-a68a-13eb30e16bbe" name="Changes" comment="[master] Refatoração concluida. Iniciando bateria de testes com RSpec.">
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DESAFIO.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/utils/null_cleaner.rb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/imgs/img.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/imgs/img_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/imgs/img_2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/imgs/img_3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/imgs/img_4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/init.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spec/requests/endossos_cancelamento_apolice_sem_endosso_spec.rb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spec/requests/endossos_cancelamento_spec.rb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spec/requests/endossos_spec.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/segarante-challenge-3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/segarante-challenge-3.iml" afterDir="false" />
+    <list default="true" id="a4a5d11b-3059-4238-a68a-13eb30e16bbe" name="Changes" comment="[master] Refatoração completa, e testes RSpec Concluidos.&#10;&#10;Iniciando testes do POSTMAN.">
+      <change afterPath="$PROJECT_DIR$/img.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img_1.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HELP.md" beforeDir="false" afterPath="$PROJECT_DIR$/HELP.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Segarante Apolices Challenge.postman_collection.json" beforeDir="false" afterPath="$PROJECT_DIR$/old_postman/Segarante Apolices Challenge.postman_collection.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/apolices_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/apolices_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/apolice.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/apolice.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/repository/apolice_repository.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/apolice_repository.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/repository/endosso_repository.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/endosso_repository.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/endosso_service.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/endosso_service.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/database.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/postgres_image/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/postgres_image/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spec/rails_helper.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/rails_helper.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spec/requests/apolices_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/requests/apolices_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DESAFIO.md" beforeDir="false" afterPath="$PROJECT_DIR$/DESAFIO.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +16,9 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
@@ -117,8 +93,8 @@
       <recent name="C:\git\segarante-challenge-3\app\repository" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\git\segarante-challenge-3\imgs" />
       <recent name="C:\git\segarante-challenge-3\old_postman" />
+      <recent name="C:\git\segarante-challenge-3\imgs" />
       <recent name="C:\git\segarante-challenge-3\app\models\vo" />
       <recent name="C:\git\segarante-challenge-3\app\models" />
     </key>
@@ -346,7 +322,8 @@
     <MESSAGE value="[master] Lógica feita de forma completa. Iniciando melhoria na estrutura do projeto." />
     <MESSAGE value="[master] Iniciando refatoração." />
     <MESSAGE value="[master] Refatoração concluida. Iniciando bateria de testes com RSpec." />
-    <option name="LAST_COMMIT_MESSAGE" value="[master] Refatoração concluida. Iniciando bateria de testes com RSpec." />
+    <MESSAGE value="[master] Refatoração completa, e testes RSpec Concluidos.&#10;&#10;Iniciando testes do POSTMAN." />
+    <option name="LAST_COMMIT_MESSAGE" value="[master] Refatoração completa, e testes RSpec Concluidos.&#10;&#10;Iniciando testes do POSTMAN." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -398,7 +375,7 @@
     <SUITE FILE_PATH="coverage/segarante_challenge_3@Apolice_sem_Endossos_GET__apolices__numero_apolice_endossos_Cancelar_Endosso__de_uma_Apolice_sem_endosso_e_torna_la_BAIXADA.rcov" NAME="Apolice sem Endossos GET /apolices/:numero_apolice/endossos Cancelar Endosso, de uma Apolice sem endosso e torna-la BAIXADA Coverage Results" MODIFIED="1761508194412" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
     <SUITE FILE_PATH="coverage/segarante_challenge_3@Endossos_GET__apolices__numero_apolice_endossos_Criar_endosso_sobre_uma_apólice__reducao_is_.rcov" NAME="Endossos GET /apolices/:numero_apolice/endossos Criar endosso sobre uma apólice [reducao_is] Coverage Results" MODIFIED="1761503858514" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
     <SUITE FILE_PATH="coverage/segarante_challenge_3@Endossos_GET__apolices__numero_apolice_endossos_Criar_endosso_sobre_uma_apólice__reducao_is_alteracao_vigencia_.rcov" NAME="Endossos GET /apolices/:numero_apolice/endossos Criar endosso sobre uma apólice [reducao_is_alteracao_vigencia] Coverage Results" MODIFIED="1761503869447" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
-    <SUITE FILE_PATH="coverage/segarante_challenge_3@segarante_challenge_3.rcov" NAME="segarante-challenge-3 Coverage Results" MODIFIED="1761507103336" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
+    <SUITE FILE_PATH="coverage/segarante_challenge_3@segarante_challenge_3.rcov" NAME="segarante-challenge-3 Coverage Results" MODIFIED="1761509462231" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
     <SUITE FILE_PATH="coverage/segarante_challenge_3@All_specs_in_spec__segarante_challenge_3.rcov" NAME="All specs in spec: segarante-challenge-3 Coverage Results" MODIFIED="1761509041409" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
     <SUITE FILE_PATH="coverage/segarante_challenge_3@Apolices_GET__apolices__numero.rcov" NAME="Apolices GET /apolices/:numero Coverage Results" MODIFIED="1761502965408" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
   </component>
