@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4a5d11b-3059-4238-a68a-13eb30e16bbe" name="Changes" comment="[master] Refatoração completa, e testes RSpec Concluidos.&#10;&#10;Iniciando testes do POSTMAN.">
-      <change afterPath="$PROJECT_DIR$/img.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img_1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DESAFIO.md" beforeDir="false" afterPath="$PROJECT_DIR$/DESAFIO.md" afterDir="false" />
-    </list>
+    <list default="true" id="a4a5d11b-3059-4238-a68a-13eb30e16bbe" name="Changes" comment="[master] Ultima atualização da doc, e do postman." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -323,7 +318,8 @@
     <MESSAGE value="[master] Iniciando refatoração." />
     <MESSAGE value="[master] Refatoração concluida. Iniciando bateria de testes com RSpec." />
     <MESSAGE value="[master] Refatoração completa, e testes RSpec Concluidos.&#10;&#10;Iniciando testes do POSTMAN." />
-    <option name="LAST_COMMIT_MESSAGE" value="[master] Refatoração completa, e testes RSpec Concluidos.&#10;&#10;Iniciando testes do POSTMAN." />
+    <MESSAGE value="[master] Ultima atualização da doc, e do postman." />
+    <option name="LAST_COMMIT_MESSAGE" value="[master] Ultima atualização da doc, e do postman." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

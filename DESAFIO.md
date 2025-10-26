@@ -111,16 +111,16 @@ Deve ser entregue uma suíte de testes cobrindo os principais fluxos funcionais:
 <div align="center">
 
 - Criação de apólice<br>
-  <img src="imgs/img.png" width="500" />
+  ![Criação de apólice](imgs/img.png)
 - Criação de endossos de todos os tipos<br>
-  <img src="imgs/img_1.png" width="500" />
+  ![Criação de endossos de todos os tipos](imgs/img_1.png)
 - Cancelamento do endosso atual<br>
-  <img src="imgs/img_2.png" width="500" />
+  ![Cancelamento do endosso atual](imgs/img_2.png)
 - Atualização do LMG e status da apólice<br>
 - Cancelando endosso, de uma apólice que não possui.<br>
-  <img src="imgs/img_3.png" width="500" />
+  ![Cancelando endosso, de uma apólice que não possui](imgs/img_3.png)
 - Atualização do LMG<br>
-  <img src="imgs/img_4.png" width="500" />
+  ![Atualização do LMG](imgs/img_4.png)
 
 </div>
 
@@ -132,9 +132,9 @@ Deve ser entregue uma <b>collection do Postman</b> contendo:
 <div align="center">
 
 - Todas as requisições necessárias para criar e consultar apólices e endossos<br>
-  <img src="img_1.png" width="500" />
+  ![Todas as requisições necessárias para criar e consultar apólices e endossos](img_1.png)
 - Automação entre as requisições<br>
-  <img src="img.png" width="500" />
+  ![Automação entre as requisições](img.png)
 
 </div>
 
