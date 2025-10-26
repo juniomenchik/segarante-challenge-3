@@ -4,20 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4a5d11b-3059-4238-a68a-13eb30e16bbe" name="Changes" comment="[master] Lógica feita de forma completa. Iniciando melhoria na estrutura do projeto.">
-      <change afterPath="$PROJECT_DIR$/app/services/endosso_service.rb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/services/exception_service.rb" afterDir="false" />
+    <list default="true" id="a4a5d11b-3059-4238-a68a-13eb30e16bbe" name="Changes" comment="[master] Iniciando refatoração.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/apolices_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/apolices_controller.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/apolice.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/apolice.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/dto/apolice_dto.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/dto/apolice_dto.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/dto/endosso_dto.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/dto/endosso_dto.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/endosso.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/endosso.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/vo/apolice_vo.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/vo/apolice_vo.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/vo/endosso_vo.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/vo/endosso_vo.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/repository/apolice_repository.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/apolice_repository.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/repository/endosso_repository.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/endosso_repository.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/services/apolice_service.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/apolice_service.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/endosso_cancellation_service.rb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/endosso_creator.rb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/endosso_service.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/endosso_service.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +63,8 @@
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "ruby.structure.view.model.defaults.configured": "true"
+    "ruby.structure.view.model.defaults.configured": "true",
+    "settings.editor.selected.configurable": "preferences.keymap"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -163,27 +163,47 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="[master] Tratando eventuais problemas do endosso enviado." />
     <MESSAGE value="[master] Faltando apenas a lógica de cancelamento de endosso." />
     <MESSAGE value="[master] Lógica feita de forma completa. Iniciando melhoria na estrutura do projeto." />
-    <option name="LAST_COMMIT_MESSAGE" value="[master] Lógica feita de forma completa. Iniciando melhoria na estrutura do projeto." />
+    <MESSAGE value="[master] Iniciando refatoração." />
+    <option name="LAST_COMMIT_MESSAGE" value="[master] Iniciando refatoração." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/app/services/endosso_creator.rb</url>
-          <line>73</line>
+          <url>file://$PROJECT_DIR$/app/services/endosso_service.rb</url>
+          <line>32</line>
           <properties myBlockOrdinal="-1">
             <option name="block-ordinal" value="-1" />
           </properties>
-          <option name="timeStamp" value="11" />
+          <option name="timeStamp" value="69" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/app/services/endosso_service.rb</url>
+          <line>26</line>
+          <properties myBlockOrdinal="-1">
+            <option name="block-ordinal" value="-1" />
+          </properties>
+          <option name="timeStamp" value="72" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/segarante_challenge_3@segarante_challenge_3.rcov" NAME="segarante-challenge-3 Coverage Results" MODIFIED="1761427117543" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
+    <SUITE FILE_PATH="coverage/segarante_challenge_3@segarante_challenge_3.rcov" NAME="segarante-challenge-3 Coverage Results" MODIFIED="1761472608555" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
   </component>
 </project>

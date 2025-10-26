@@ -7,48 +7,31 @@ class Apolice < ApplicationRecord
 
   has_many :endossos, class_name: "Endosso", foreign_key: "tb_apolice_numero", inverse_of: :apolice
 
-  validates :data_emissao, :inicio_vigencia, :fim_vigencia, :importancia_segurada, :lmg, presence: true
-  validate :vigencias_validas
-  validate :inicio_max_30_dias
+  def aplicar_endosso(endosso)
 
-  def lmg_positivo?(new_lmg)
-    new_lmg > 0
-  end
+    if endosso[:tipo_endosso] == "CANCELAMENTO"
 
-  def aplicar_snapshot!(snapshot_is:, snapshot_fim_vigencia:)
+    else
 
-    if snapshot_fim_vigencia != nil
-      update!(
-        fim_vigencia: snapshot_fim_vigencia,
-        status: cobertura_ativa?(snapshot_fim_vigencia) ? "ATIVA" : "BAIXADA"
-      )
+      if endosso[:fim_vigencia] != nil
+        update!(
+          fim_vigencia: endosso[:fim_vigencia],
+          status: endosso[:fim_vigencia] < Date.today ? "BAIXADA" : "ATIVA"
+        )
+      end
+
+      if endosso[:importancia_segurada] != nil
+        new_lmg = lmg + endosso[:importancia_segurada].to_d
+
+        update!(
+          lmg: new_lmg > 0 ? new_lmg : lmg,
+          status: new_lmg > 0 ? "ATIVA" : "BAIXADA"
+        )
+      end
+
     end
 
-    if snapshot_is != nil
 
-      new_lmg = lmg + snapshot_is
 
-      update!(
-        # importancia_segurada: snapshot_is,  DEVO ATUALIZAR O IS ORIGINAL ?
-        lmg: lmg_positivo?(new_lmg)    ? new_lmg : lmg,
-        status: lmg_positivo?(new_lmg) ? "ATIVA" : "BAIXADA"
-      )
-    end
-
-  end
-
-  def cobertura_ativa?(fim)
-    Date.today <= fim
-  end
-
-  private
-
-  def vigencias_validas
-    errors.add(:fim_vigencia, "Não deve ser anterior ao Inicio.") if fim_vigencia < inicio_vigencia
-  end
-
-  def inicio_max_30_dias
-    return if (inicio_vigencia - data_emissao).abs <= 30
-    errors.add(:inicio_vigencia, "O inicio da vigência pode ser no passado ou no futuro da data de emissão em no maximo 30 dias.")
   end
 end

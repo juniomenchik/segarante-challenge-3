@@ -3,65 +3,74 @@ class ApolicesController < ApplicationController
   before_action :initialize_classes
 
   def initialize_classes
-    @service = ApoliceService.new
+    @apolice_service = ApoliceService.new
+    @endosso_service = EndossoService.new
   end
 
   def create
+    begin
+      entity = @apolice_service.criar_apolice(apolice_params)
+      render json: entity, status: :created
 
-    @service.criar_apolice(apolice_params)
-
-    apolice = Apolice.new(apolice_params.merge(status: "ATIVA", lmg: apolice_params[:importancia_segurada]))
-
-    if apolice.save
-      render json: apolice, status: :created
-    else
-      if apolice.errors.added?(:numero, :taken)
-        render json: { erros: { numero: "numero de policie ja existe." } }, status: :conflict
-      else
-        render json: { erros: apolice.errors.to_hash }, status: :unprocessable_entity
-      end
+    rescue StandardError => e
+      render json: e.message, status: :unprocessable_entity
     end
-  rescue ActiveRecord::RecordNotUnique
-    render json: { erros: { numero: "numero de policie ja existe." } }, status: :conflict
   end
 
   def index
-    render json: Apolice.all
+    begin
+      entities = @apolice_service.listar_apolices
+      render json: entities, status: :ok
+
+    rescue StandardError => e
+      render json: e.message, status: :unprocessable_entity
+    end
   end
 
   def show
-    render json: {
-      apolice: @apolice.as_json,
-      endossos: @apolice.endossos.order(:data_emissao, :numero).as_json
-    }
+    begin
+      entity = @apolice_service.consulta_por_numero_da_apolicie(params[:id])
+      render json: entity, status: :ok
+
+    rescue StandardError => e
+      render json: e.message, status: :unprocessable_entity
+    end
+  end
+
+  def endossos_create
+    begin
+      entity = @endosso_service.criar_endosso(params[:id],endosso_params)
+      render json: entity, status: :ok
+
+    rescue StandardError => e
+      render json: e.message, status: :unprocessable_entity
+    end
   end
 
   # Endossos
   def endossos_index
-    render json: @apolice.endossos.order(:data_emissao, :numero)
+    begin
+
+      entity = @endosso_service.consultar_endossos_de_uma_apolicie_pelo_numero(params[:id])
+      render json: entity, status: :ok
+
+    rescue StandardError => e
+      render json: e.message, status: :unprocessable_entity
+    end
+
   end
 
-  def endossos_create
-    if endosso_params[:tipo_endosso] == "cancelamento"
-      cancelamento = EndossoCancellationService.new(apolice: @apolice).call
-      render json: cancelamento, status: :created
-    else
-      endosso = EndossoCreator.new(apolice: @apolice, params: endosso_params).call
-      render json: endosso, status: :created
-    end
-  rescue ActiveRecord::RecordInvalid => e
-    render json: { erros: e.record.errors.to_hash }, status: :unprocessable_entity
-  rescue StandardError => e
-    render json: { erros: { base: e.message } }, status: :unprocessable_entity
-  end
 
   def endossos_show
-    endosso = Endosso.find_by(numero: params[:endosso_id])
-    if endosso
-      render json: endosso
-    else
-      render json: { erro: "Endosso não encontrado" }, status: :not_found
+
+    begin
+      entity = @endosso_service.consultar_endosso_de_apolice(params[:id], params[:endosso_id])
+      render json: entity, status: :ok
+
+    rescue StandardError => e
+      render json: e.message, status: :unprocessable_entity
     end
+
   end
 
   private
@@ -79,7 +88,9 @@ class ApolicesController < ApplicationController
 
   def endosso_params
     params.require(:endosso).permit(
+      :id,
       :importancia_segurada,
+      :tb_apolice_numero,
       :fim_vigencia,
       :data_emissao,
       :tipo_endosso
