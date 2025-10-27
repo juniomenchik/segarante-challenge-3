@@ -1,0 +1,882 @@
+{
+	"info": {
+		"_postman_id": "3be61b19-9a42-4cf6-900d-382f5a83b3af",
+		"name": "Segarante Apolices Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16001297"
+	},
+	"item": [
+		{
+			"name": "Criar apólice",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Gera um número aleatório de 6 dígitos",
+							"function gerarNumeroApolice() {",
+							"    return Math.floor(100000 + Math.random() * 900000).toString();",
+							"}",
+							"",
+							"const numeroApolice = gerarNumeroApolice();",
+							"pm.environment.set('num_policy', numeroApolice);",
+							"pm.collectionVariables.set('num_policy', numeroApolice);",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test('Response status code is 201', function () {",
+							"    pm.expect(pm.response.code).to.eql(201);",
+							"})",
+							"",
+							"pm.test('Response has the required fields', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData).to.have.all.keys('numero', 'data_emissao', 'inicio_vigencia', 'fim_vigencia', 'importancia_segurada', 'lmg', 'status');",
+							"})",
+							"",
+							"pm.test('Numero is a non-negative integer', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.have.property('numero').that.is.a('number').and.is.at.least(0);",
+							"})",
+							"",
+							"pm.test('Data_emissao is in a valid date format', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.have.property('data_emissao');",
+							"    pm.expect(responseData.data_emissao).to.match(/^\\d{4}-\\d{2}-\\d{2}$/, 'Data_emissao must be in YYYY-MM-DD format');",
+							"})",
+							"",
+							"pm.test('Status is one of the expected values', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect([",
+							"        'ATIVA',",
+							"        'BAIXADA'",
+							"    ]).to.include(responseData.status);",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"apolice\": {\n        \"numero\": {{num_policy}},\n        \"data_emissao\": \"2025-10-25\",\n        \"inicio_vigencia\": \"2025-11-24\",\n        \"fim_vigencia\": \"2025-12-25\",\n        \"importancia_segurada\": 1000.01,\n        \"lmg\": 1000.00\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{lh}}/apolices",
+					"host": [
+						"{{lh}}"
+					],
+					"path": [
+						"apolices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar apólices",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response Content-Type is application/json\", function () {",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response is an array with at least one element\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('array').that.is.not.empty;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate the fields in the object\", function () {",
+							"    const responseData = pm.response.json();",
+							"",
+							"    pm.expect(responseData).to.be.an('array').that.is.not.empty;",
+							"",
+							"    responseData.forEach(item => {",
+							"        pm.expect(item).to.be.an('object');",
+							"        pm.expect(item).to.have.all.keys('numero', 'data_emissao', 'inicio_vigencia', 'fim_vigencia', 'importancia_segurada', 'lmg', 'status');",
+							"        ",
+							"        pm.expect(item.numero).to.be.a('number');",
+							"        pm.expect(item.data_emissao).to.be.a('string');",
+							"        pm.expect(item.inicio_vigencia).to.be.a('string');",
+							"        pm.expect(item.fim_vigencia).to.be.a('string');",
+							"        pm.expect(item.importancia_segurada).to.be.a('string');",
+							"        pm.expect(item.lmg).to.be.a('string');",
+							"        pm.expect(item.status).to.be.a('string');",
+							"    });",
+							"});",
+							"",
+							"",
+							"pm.test(\"Data fields are in a valid format\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('array').that.is.not.empty;",
+							"",
+							"    responseData.forEach(item => {",
+							"        pm.expect(item.data_emissao).to.be.a('string').that.matches(/^\\d{4}-\\d{2}-\\d{2}$/, \"data_emissao should be in YYYY-MM-DD format\");",
+							"        pm.expect(item.inicio_vigencia).to.be.a('string').that.matches(/^\\d{4}-\\d{2}-\\d{2}$/, \"inicio_vigencia should be in YYYY-MM-DD format\");",
+							"        pm.expect(item.fim_vigencia).to.be.a('string').that.matches(/^\\d{4}-\\d{2}-\\d{2}$/, \"fim_vigencia should be in YYYY-MM-DD format\");",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{lh}}/apolices",
+					"host": [
+						"{{lh}}"
+					],
+					"path": [
+						"apolices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta por número da apólice",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test('Response status code is 200', function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"})",
+							"",
+							"pm.test('Validate the \\'apolice\\' object structure', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.apolice).to.be.an('object');",
+							"    const apolice = responseData.apolice;",
+							"    pm.expect(apolice).to.have.all.keys('numero', 'data_emissao', 'inicio_vigencia', 'fim_vigencia', 'importancia_segurada', 'lmg', 'status');",
+							"    pm.expect(apolice.numero).to.be.a('number');",
+							"    pm.expect(apolice.data_emissao).to.be.a('string');",
+							"    pm.expect(apolice.inicio_vigencia).to.be.a('string');",
+							"    pm.expect(apolice.fim_vigencia).to.be.a('string');",
+							"    pm.expect(apolice.importancia_segurada).to.be.a('string');",
+							"    pm.expect(apolice.lmg).to.be.a('string');",
+							"    pm.expect(apolice.status).to.be.a('string');",
+							"})",
+							"",
+							"pm.test('Ensure \\'status\\' is a valid value from a predefined set of statuses', function () {",
+							"    const responseData = pm.response.json();",
+							"    const validStatuses = [",
+							"        'ATIVA',",
+							"        'BAIXADA'",
+							"    ];",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(validStatuses).to.include(responseData.apolice.status);",
+							"})",
+							"",
+							"pm.test('The \\'endossos\\' array is present and contains the expected number of elements', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.endossos).to.exist.and.to.be.an('array');",
+							"    pm.expect(responseData.endossos.length).to.be.above(-1, 'Array should not be empty');",
+							"})",
+							"",
+							"pm.test('Validate that \\'data_emissao\\' and \\'fim_vigencia\\' are in a valid date format', function () {",
+							"    const responseData = pm.response.json();",
+							"    const datePattern = /^\\d{4}-\\d{2}-\\d{2}$/;",
+							"    pm.expect(responseData.apolice.data_emissao).to.match(datePattern, 'data_emissao should be in YYYY-MM-DD format');",
+							"    pm.expect(responseData.apolice.fim_vigencia).to.match(datePattern, 'fim_vigencia should be in YYYY-MM-DD format');",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{lh}}/apolices/{{num_policy}}",
+					"host": [
+						"{{lh}}"
+					],
+					"path": [
+						"apolices",
+						"{{num_policy}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar endosso sobre uma apólice [aumento_is]",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Gera um número aleatório de 6 dígitos\r",
+							"function gerarNumeroApolice() {\r",
+							"    return Math.floor(100000 + Math.random() * 900000).toString();\r",
+							"}\r",
+							"\r",
+							"const numeroApolice = gerarNumeroApolice();\r",
+							"pm.environment.set('num_endosso', numeroApolice);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Response status code is 201\", function () {",
+							"    pm.expect(pm.response.code).to.eql(201);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response has required fields\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData).to.have.all.keys('numero', 'tb_apolice_numero', 'tipo_endosso', 'data_emissao', 'importancia_segurada', 'created_at');",
+							"});",
+							"",
+							"",
+							"pm.test(\"Tipo_endosso must be a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.tipo_endosso).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, \"Tipo_endosso should not be empty\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Data_emissao must be in a valid date format\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.have.property('data_emissao');",
+							"    pm.expect(responseData.data_emissao).to.match(/^\\d{4}-\\d{2}-\\d{2}$/, \"Date format should be YYYY-MM-DD\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Importance_segurada must be a non-negative number\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.have.property('importancia_segurada').that.is.a('string').and.to.not.be.empty;",
+							"    pm.expect(Number(responseData.importancia_segurada)).to.be.at.least(0, \"Importance_segurada should be a non-negative number\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"endosso\": {\n        \"numero\": {{num_endosso}},\n        \"importancia_segurada\": 350.00\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{lh}}/apolices/{{num_policy}}/endossos",
+					"host": [
+						"{{lh}}"
+					],
+					"path": [
+						"apolices",
+						"{{num_policy}}",
+						"endossos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar endosso sobre uma apólice [reducao_is]",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Gera um número aleatório de 6 dígitos\r",
+							"function gerarNumeroApolice() {\r",
+							"    return Math.floor(100000 + Math.random() * 900000).toString();\r",
+							"}\r",
+							"\r",
+							"const numeroApolice = gerarNumeroApolice();\r",
+							"pm.environment.set('num_endosso', numeroApolice);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test('Response status code is 201', function () {",
+							"    pm.expect(pm.response.code).to.equal(201);",
+							"})",
+							"",
+							"pm.test('Response has the required fields', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData).to.have.all.keys('numero', 'tb_apolice_numero', 'tipo_endosso', 'data_emissao', 'importancia_segurada', 'created_at');",
+							"})",
+							"",
+							"pm.test('Tipo_endosso must be a non-empty string', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.tipo_endosso).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, 'Tipo_endosso should not be empty');",
+							"})",
+							"",
+							"pm.test('Data_emissao is in a valid date format', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.data_emissao).to.match(/^\\d{4}-\\d{2}-\\d{2}$/, 'Data_emissao should be in YYYY-MM-DD format');",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"endosso\": {\n        \"numero\": {{num_endosso}},\n        \"importancia_segurada\": -300.00\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{lh}}/apolices/{{num_policy}}/endossos",
+					"host": [
+						"{{lh}}"
+					],
+					"path": [
+						"apolices",
+						"{{num_policy}}",
+						"endossos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar endosso sobre uma apólice [aumento_is_alteracao_vigencia]",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Gera um número aleatório de 6 dígitos\r",
+							"function gerarNumeroApolice() {\r",
+							"    return Math.floor(100000 + Math.random() * 900000).toString();\r",
+							"}\r",
+							"\r",
+							"const numeroApolice = gerarNumeroApolice();\r",
+							"pm.environment.set('num_endosso', numeroApolice);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test('Response status code is 201', function () {",
+							"    pm.expect(pm.response.code).to.eql(201);",
+							"})",
+							"",
+							"pm.test('Response has required fields', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData).to.have.all.keys('numero', 'tb_apolice_numero', 'tipo_endosso', 'data_emissao', 'fim_vigencia', 'importancia_segurada', 'created_at');",
+							"})",
+							"",
+							"pm.test('Tipo_endosso must be a non-empty string', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.have.property('tipo_endosso').that.is.a('string').and.to.have.lengthOf.at.least(1, 'Value should not be empty');",
+							"})",
+							"",
+							"pm.test('Data_emissao is in a valid date format', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.data_emissao).to.match(/^\\d{4}-\\d{2}-\\d{2}$/, 'Data_emissao should be in YYYY-MM-DD format');",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"endosso\": {\n        \"numero\": {{num_endosso}},\n        \"importancia_segurada\": 500.00,\n        \"fim_vigencia\": \"2028-12-25\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{lh}}/apolices/{{num_policy}}/endossos",
+					"host": [
+						"{{lh}}"
+					],
+					"path": [
+						"apolices",
+						"{{num_policy}}",
+						"endossos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar endosso sobre uma apólice [reducao_is_alteracao_vigencia]",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Gera um número aleatório de 6 dígitos\r",
+							"function gerarNumeroApolice() {\r",
+							"    return Math.floor(100000 + Math.random() * 900000).toString();\r",
+							"}\r",
+							"\r",
+							"const numeroApolice = gerarNumeroApolice();\r",
+							"pm.environment.set('num_endosso', numeroApolice);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test('Response status code is 201', function () {",
+							"    pm.expect(pm.response.code).to.eql(201);",
+							"})",
+							"",
+							"pm.test('Response contains required fields', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData).to.have.all.keys('numero', 'tb_apolice_numero', 'tipo_endosso', 'data_emissao', 'fim_vigencia', 'importancia_segurada', 'created_at');",
+							"})",
+							"",
+							"pm.test('Tipo_endosso must be a non-empty string', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.tipo_endosso).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, 'Value should not be empty');",
+							"})",
+							"",
+							"pm.test('Data_emissao is in a valid date format', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.have.property('data_emissao');",
+							"    pm.expect(responseData.data_emissao).to.match(/^\\d{4}-\\d{2}-\\d{2}$/, 'Data_emissao must be in YYYY-MM-DD format');",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"endosso\": {\n        \"numero\": {{num_endosso}},\n        \"importancia_segurada\": -500.00,\n        \"fim_vigencia\": \"2029-12-25\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{lh}}/apolices/{{num_policy}}/endossos",
+					"host": [
+						"{{lh}}"
+					],
+					"path": [
+						"apolices",
+						"{{num_policy}}",
+						"endossos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar endosso  de cancelamento.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Gera um número aleatório de 6 dígitos\r",
+							"function gerarNumeroApolice() {\r",
+							"    return Math.floor(100000 + Math.random() * 900000).toString();\r",
+							"}\r",
+							"\r",
+							"const numeroApolice = gerarNumeroApolice();\r",
+							"pm.environment.set('num_endosso', numeroApolice);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Response status code is 201\", function () {",
+							"    pm.expect(pm.response.code).to.eql(201);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response has required fields\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData).to.have.all.keys('numero', 'tb_apolice_numero', 'tipo_endosso', 'data_emissao', 'cancelado_endosso_numero', 'created_at');",
+							"});",
+							"",
+							"",
+							"pm.test(\"Tipo_endosso must be a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.have.property('tipo_endosso').that.is.a('string').and.is.not.empty;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Data_emissao is in a valid date format\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.data_emissao).to.match(/^\\d{4}-\\d{2}-\\d{2}$/, \"Data_emissao should be in YYYY-MM-DD format\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Created_at is in a valid date format\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.have.property('created_at').that.matches(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}.\\d{3}Z$/, \"Created_at should be in ISO 8601 format\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"endosso\": {\n        \"numero\": {{num_endosso}},\n        \"tipo_endosso\": \"cancelamento\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{lh}}/apolices/{{num_policy}}/endossos",
+					"host": [
+						"{{lh}}"
+					],
+					"path": [
+						"apolices",
+						"{{num_policy}}",
+						"endossos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar endossos de uma apólice",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test('Response status code is 200', function () {",
+							"    pm.expect(pm.response.code).to.eql(200);",
+							"})",
+							"",
+							"pm.test('Response is an array with at least one element', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.be.an('array').that.is.not.empty;",
+							"})",
+							"",
+							"pm.test('Ensure data_emissao is in a valid date format', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.be.an('array').that.is.not.empty;",
+							"    responseData.forEach(function (item) {",
+							"        pm.expect(item.data_emissao).to.match(/^\\d{4}-\\d{2}-\\d{2}$/, 'data_emissao should be in YYYY-MM-DD format');",
+							"    });",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{lh}}/apolices/{{num_policy}}/endossos",
+					"host": [
+						"{{lh}}"
+					],
+					"path": [
+						"apolices",
+						"{{num_policy}}",
+						"endossos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar endosso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test('Response status code is 200', function () {",
+							"    pm.expect(pm.response.code).to.eql(200);",
+							"})",
+							"",
+							"pm.test('Response has the required fields', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData).to.have.all.keys('numero', 'tb_apolice_numero', 'tipo_endosso', 'data_emissao', 'cancelado_endosso_numero', 'created_at');",
+							"})",
+							"",
+							"pm.test('Tipo Endosso must be a non-empty string', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.tipo_endosso).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, 'Value should not be empty');",
+							"})",
+							"",
+							"pm.test('Data Emissao is in a valid date format', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.data_emissao).to.exist;",
+							"    pm.expect(responseData.data_emissao).to.match(/^\\d{4}-\\d{2}-\\d{2}$/, 'Data Emissao should be in YYYY-MM-DD format');",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{lh}}/apolices/{{num_policy}}/endossos/{{num_endosso}}",
+					"host": [
+						"{{lh}}"
+					],
+					"path": [
+						"apolices",
+						"{{num_policy}}",
+						"endossos",
+						"{{num_endosso}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "lh",
+			"value": ""
+		},
+		{
+			"key": "numeroApolice",
+			"value": ""
+		},
+		{
+			"key": "num_policy",
+			"value": ""
+		}
+	]
+}

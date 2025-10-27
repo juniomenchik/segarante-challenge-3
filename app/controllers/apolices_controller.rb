@@ -29,7 +29,7 @@ class ApolicesController < ActionController::API
     render json: NullCleaner.remove_nulls(entity), status: :created
   end
 
-  # Endossos
+
   def endossos_index
     entity = @endosso_service.consultar_endossos_de_uma_apolicie_pelo_numero(params[:id])
     render json: NullCleaner.remove_nulls(entity), status: :ok
@@ -63,16 +63,16 @@ class ApolicesController < ActionController::API
     )
   end
 
-
   private
 
   def render_error(error)
+    app_error = error.is_a?(AppError) ? error : AppError.new(error.message)
     render json: {
       error: {
-        code: error.error_code || "internal_error",
-        message: error.message
+        code: app_error.error_code || "internal_error",
+        message: app_error.message
       }
-    }, status: error.http_status || :internal_server_error
+    }, status: app_error.http_status || :internal_server_error
   end
 
 end
