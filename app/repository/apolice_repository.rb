@@ -5,14 +5,14 @@ class ApoliceRepository
   def create(attrs)
     ActiveRecord::Base.transaction do
       apolice = Apolice.create!({
-                        numero: attrs.numero,
-                        data_emissao: attrs.data_emissao,
-                        inicio_vigencia: attrs.inicio_vigencia,
-                        fim_vigencia: attrs.fim_vigencia,
-                        importancia_segurada: attrs.importancia_segurada,
-                        lmg: attrs.lmg,
-                        status: attrs.status
-                      })
+                                  numero: attrs.numero,
+                                  data_emissao: attrs.data_emissao,
+                                  inicio_vigencia: attrs.inicio_vigencia,
+                                  fim_vigencia: attrs.fim_vigencia,
+                                  importancia_segurada: attrs.importancia_segurada,
+                                  lmg: attrs.lmg,
+                                  status: attrs.status
+                                })
 
       Endosso.create!(
         numero: rand(100000..999999).to_s,
@@ -37,8 +37,7 @@ class ApoliceRepository
   def consulta_por_numero_da_apolicie(numero)
     Apolice.transaction do
       apolice = Apolice.find_by(numero: numero)
-      return nil unless apolice
-
+      return nil if apolice.nil?
       {
         apolice: apolice.as_json,
         endossos: apolice.endossos.order(:data_emissao).as_json

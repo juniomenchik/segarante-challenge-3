@@ -21,9 +21,9 @@ class ApoliceService
   end
 
   def consulta_por_numero_da_apolicie(numero_apolice)
-
-    @apolice_repo.consulta_por_numero_da_apolicie(numero_apolice)
-
+    apolice = @apolice_repo.consulta_por_numero_da_apolicie(numero_apolice)
+    raise NotFoundError.new("Apólice de numero: #{numero_apolice} não encontrada") unless apolice
+    apolice
   end
 
   def listar_apolices

@@ -2,6 +2,9 @@ class ApolicesController < ActionController::API
 
   before_action :initialize_classes
 
+  rescue_from AppError, with: :render_app_error
+  rescue_from StandardError, with: :render_internal_error
+
   def initialize_classes
     @apolice_service = ApoliceService.new
     @endosso_service = EndossoService.new
@@ -28,19 +31,8 @@ class ApolicesController < ActionController::API
   end
 
   def show
-    begin
-
-      entity = @apolice_service.consulta_por_numero_da_apolicie(params[:id])
-      if entity.nil?
-        render json: { error: "Apólice Não encontrada" }, status: :not_found
-      else
-        render json: NullCleaner.remove_nulls(entity), status: :ok
-      end
-
-    rescue StandardError => e
-      render json: e.message, status: :unprocessable_entity
-    end
-
+    entity = @apolice_service.consulta_por_numero_da_apolicie(params[:id])
+    render json: NullCleaner.remove_nulls(entity), status: :ok
   end
 
   def endossos_create
@@ -100,4 +92,16 @@ class ApolicesController < ActionController::API
       :tipo_endosso
     )
   end
+
+
+  private
+
+  def render_app_error(error)
+    render json: error.as_json, status: error.http_status
+  end
+
+  def render_internal_error(error)
+    render json: { error: { code: "internal_error", message: error.message } }, status: :internal_server_error
+  end
+
 end
