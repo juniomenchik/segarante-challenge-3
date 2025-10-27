@@ -9,28 +9,30 @@ class EndossoRepository
 
       raise StandardError, "A apólice não está ativa. Não é possível criar endossos." unless apolice[:status] == "ATIVA"
 
-      
       case attrs.tipo_endosso
       when "cancelamento"
         create_cancelamento(apolice, attrs)
       else
         create_normal(apolice, attrs)
       end
-      
+
     end
   end
 
   def find_all
-    ActiveRecord::Base.transaction { Endosso.all }
+    ActiveRecord::Base.transaction do
+      Endosso.all
+    end
   end
 
   def find_by_police_endosso(numero_apolice, numero_endosso)
     ActiveRecord::Base.transaction do
+
       apolice = Apolice.find_by(numero: numero_apolice)
-      raise ActiveRecord::RecordNotFound, "Apólice não encontrada" unless apolice
+      raise NotFoundError.new("Apólice de numero: #{numero_apolice} não encontrada") unless apolice
 
       endosso = apolice.endossos.find_by(numero: numero_endosso)
-      raise ActiveRecord::RecordNotFound, "Endosso não encontrado para esta apólice" unless endosso
+      raise NotFoundError.new("Endosso de numero: #{numero_endosso} não encontrado") unless endosso
 
       endosso
     end
@@ -40,6 +42,9 @@ class EndossoRepository
   def find_by_apolice_numero(numero)
     ActiveRecord::Base.transaction do
       endosso = Endosso.where.not(tb_apolice_numero: nil).where(tb_apolice_numero: numero)
+
+      raise NotFoundError.new("Não existem endossos para a apólice de número: #{numero}") if endosso.empty?
+
       endosso
     end
   end
@@ -62,7 +67,6 @@ class EndossoRepository
     )
 
     endosso_criado
-
 
   end
 

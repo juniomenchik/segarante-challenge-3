@@ -37,18 +37,11 @@ class ApoliceRepository
   def consulta_por_numero_da_apolicie(numero)
     Apolice.transaction do
       apolice = Apolice.find_by(numero: numero)
-      return nil if apolice.nil?
+      raise NotFoundError.new("Apólice de numero: #{numero} não encontrada") unless apolice
       {
         apolice: apolice.as_json,
         endossos: apolice.endossos.order(:data_emissao).as_json
       }
-    end
-  end
-
-  def update_apolice(apolice, attrs)
-    Apolice.transaction do
-      apolice.update!(attrs)
-      apolice
     end
   end
 
