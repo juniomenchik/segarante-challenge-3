@@ -55,11 +55,13 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem 'database_cleaner-active_record', '2.2.2'
+  gem 'database_cleaner-core', '2.0.1'
+
 end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem 'database_cleaner-active_record'
   gem "capybara"
   gem "selenium-webdriver"
 end

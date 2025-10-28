@@ -8,6 +8,7 @@ class CreateTbApolices < ActiveRecord::Migration[7.1]
       t.decimal :importancia_segurada, precision: 15, scale: 2, null: false
       t.decimal :lmg, precision: 15, scale: 2, null: false
       t.string :status, null: false
+      t.string :observacao
     end
   end
 end

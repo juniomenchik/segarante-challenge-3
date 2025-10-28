@@ -20,7 +20,6 @@ COPY . .
 
 # Set environment variables directly in the Dockerfile
 ENV RAILS_ENV=development \
-    DATABASE_URL=postgresql://postgres:postgres@postgres:5432/postgres \
     RACK_ENV=development \
     PORT=3000
 
@@ -31,4 +30,4 @@ RUN mkdir -p tmp/pids
 EXPOSE 3000
 
 # Define the command to run your Rails application
-CMD bundle exec rails db:migrate && bundle exec rails server -b 0.0.0.0
+CMD bundle exec rails db:create db:schema:load && bundle exec rails server -b 0.0.0.0

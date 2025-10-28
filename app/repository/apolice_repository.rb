@@ -11,7 +11,8 @@ class ApoliceRepository
                                   fim_vigencia: attrs.fim_vigencia,
                                   importancia_segurada: attrs.importancia_segurada,
                                   lmg: attrs.lmg,
-                                  status: attrs.status
+                                  status: attrs.status,
+                                  observacao: attrs.observacao
                                 })
 
       Endosso.create!(
@@ -21,6 +22,7 @@ class ApoliceRepository
         fim_vigencia: attrs.fim_vigencia,
         data_emissao: attrs.data_emissao,
         importancia_segurada: attrs.importancia_segurada,
+        observacao: attrs.observacao,
         created_at: Time.current
       )
 

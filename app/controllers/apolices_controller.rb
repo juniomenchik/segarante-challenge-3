@@ -47,7 +47,8 @@ class ApolicesController < ActionController::API
       :inicio_vigencia,
       :fim_vigencia,
       :importancia_segurada,
-      :lmg
+      :lmg, # `lmg` não será obrigatório, apenas permitido se vier
+      :observacao
     )
   end
 
@@ -59,7 +60,8 @@ class ApolicesController < ActionController::API
       :tb_apolice_numero,
       :fim_vigencia,
       :data_emissao,
-      :tipo_endosso
+      :tipo_endosso,
+      :observacao
     )
   end
 

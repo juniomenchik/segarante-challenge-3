@@ -4,18 +4,9 @@ class EndossoService
     @endosso_repo = EndossoRepository.new
   end
 
-    def criar_endosso(tb_apolice_numero, endosso_dto)
+  def criar_endosso(tb_apolice_numero, endosso_dto)
 
-    endosso_vo = Vo::EndossoVo.new(
-      numero: endosso_dto[:numero] || nil,
-      tb_apolice_numero: tb_apolice_numero,
-      tipo_endosso: endosso_dto[:tipo_endosso] || nil,
-      data_emissao: endosso_dto[:data_emissao] || Date.today,
-      fim_vigencia: endosso_dto[:fim_vigencia] || nil,
-      importancia_segurada: endosso_dto[:importancia_segurada] || nil,
-    )
-
-    @endosso_repo.create(endosso_vo)
+    @endosso_repo.create(tb_apolice_numero, endosso_dto)
 
   end
 

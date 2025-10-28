@@ -1,19 +1,22 @@
+# Usa DATABASE_URL se fornecido (Docker/Cloud). Caso contrário usa variáveis específicas.
+<% if ENV['DATABASE_URL'].present? %>
+<% end %>
 default: &default
   adapter: postgresql
   pool: 5
   timeout: 5000
-  url: postgres://postgres:example@postgres:5432/postgres
+  url: postgres://postgres:postgres@postgres:5432/postgres
 
 development:
   <<: *default
-  url: postgres://postgres:postgres@localhost:5432/postgres
+  url: postgres://postgres:postgres@postgres:5432/postgres
   database: postgres
   username: postgres
   password: postgres
 
 test:
   <<: *default
-  url: postgres://postgres:postgres@localhost:5432/postgres
+  url: postgres://postgres:postgres@postgres:5432/postgres
   database: postgres
   username: postgres
   password: postgres

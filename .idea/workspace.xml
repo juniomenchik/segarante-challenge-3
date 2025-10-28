@@ -5,7 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a4a5d11b-3059-4238-a68a-13eb30e16bbe" name="Changes" comment="[master] Melhoria no fluxo de exceptions.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gemfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HELP.md" beforeDir="false" afterPath="$PROJECT_DIR$/HELP.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/apolices_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/apolices_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/vo/apolice_vo.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/vo/apolice_vo.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/vo/endosso_vo.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/vo/endosso_vo.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/repository/apolice_repository.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/apolice_repository.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/repository/endosso_repository.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/endosso_repository.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/apolice_service.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/apolice_service.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/endosso_service.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/endosso_service.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/database.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20251024210125_create_tb_apolices.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20251024210125_create_tb_apolices.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20251024210152_create_tb_endossos.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20251024210152_create_tb_endossos.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/schema.rb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postgres_image/docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/requests/apolices_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/requests/apolices_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/requests/endossos_cancelamento_apolice_sem_endosso_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/requests/endossos_cancelamento_apolice_sem_endosso_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/requests/endossos_cancelamento_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/requests/endossos_cancelamento_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/requests/endossos_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/requests/endossos_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/spec_helper.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/spec_helper.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +79,7 @@
     "RSpec.Apolices.executor": "Run",
     "RSpec.Endossos GET /apolices/:numero_apolice/endossos (1).executor": "Run",
     "RSpec.Endossos GET /apolices/:numero_apolice/endossos Criar endosso sobre uma apólice [aumento_is].executor": "Run",
-    "RSpec.Endossos GET /apolices/:numero_apolice/endossos Criar endosso sobre uma apólice [aumento_is_alteracao_vigencia].executor": "Run",
+    "RSpec.Endossos GET /apolices/:numero_apolice/endossos Criar endosso sobre uma apólice [aumento_is_alteracao_vigencia].executor": "Debug",
     "RSpec.Endossos GET /apolices/:numero_apolice/endossos Criar endosso sobre uma apólice [reducao_is] (1).executor": "Run",
     "RSpec.Endossos GET /apolices/:numero_apolice/endossos Criar endosso sobre uma apólice [reducao_is].executor": "Run",
     "RSpec.Endossos GET /apolices/:numero_apolice/endossos Criar endosso sobre uma apólice [reducao_is_alteracao_vigencia].executor": "Run",
@@ -67,21 +89,23 @@
     "RSpec.Endossos NotFound GET /apolices/:numero_apolice/endossos quando não existem endossos retorna 404 e code 404 no JSON.executor": "Run",
     "RSpec.Endossos NotFound.executor": "Run",
     "RSpec.Endossos.executor": "Run",
-    "RSpec.endossos_cancelamento_apolice_sem_endosso_spec.executor": "Debug",
+    "RSpec.apolices_spec.executor": "Run",
+    "RSpec.endossos_cancelamento_apolice_sem_endosso_spec.executor": "Run",
+    "RSpec.endossos_cancelamento_spec.executor": "Run",
     "Rails.segarante-challenge-3.executor": "Debug",
     "Ruby.endossos_cancelamento_apolice_sem_endosso.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "com.intellij.lang.ruby.rbs.tools.collection.workspace.sync.RbsCollectionUpdateProjectActivity#LAST_UPDATE_TIMESTAMP": "1761534090151",
+    "com.intellij.lang.ruby.rbs.tools.collection.workspace.sync.RbsCollectionUpdateProjectActivity#LAST_UPDATE_TIMESTAMP": "1761670251052",
     "git-widget-placeholder": "master",
     "last_opened_file_path": "C:/git/segarante-challenge-3/spec/requests",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "ruby.structure.view.model.defaults.configured": "true",
-    "settings.editor.selected.configurable": "preferences.keymap"
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -132,7 +156,7 @@
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Apolice sem Endossos GET /apolices/:numero_apolice/endossos Cancelar Endosso, de uma Apolice sem endosso e torna-la BAIXADA" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true" nameIsGenerated="true">
+    <configuration name="Endossos GET /apolices/:numero_apolice/endossos Criar endosso sobre uma apólice [aumento_is_alteracao_vigencia]" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true" nameIsGenerated="true">
       <module name="segarante-challenge-3" />
       <predefined_log_file enabled="true" id="RUBY_RSPEC" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="" />
@@ -148,11 +172,11 @@
       <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov" ENABLE_BRANCH_COVERAGE="true" ENABLE_FORKED_COVERAGE="true" />
       <EXTENSION ID="org.jetbrains.plugins.ruby.rails.run.RailsRunConfigurationExtension" SCRATCH_USE_RAILS_RUNNER="false" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$MODULE_DIR$/spec/requests/endossos_cancelamento_apolice_sem_endosso_spec.rb" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$MODULE_DIR$/spec/requests/endossos_cancelamento_spec.rb" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATHS" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="Apolice sem Endossos GET /apolices/:numero_apolice/endossos Cancelar Endosso, de uma Apolice sem endosso e torna-la BAIXADA" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="Endossos GET /apolices/:numero_apolice/endossos Criar endosso sobre uma apólice [aumento_is_alteracao_vigencia]" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_EXAMPLE_MATCHES" VALUE="false" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="LINE_NUMBER_EXAMPLE_IDS" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
@@ -165,7 +189,7 @@
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Endossos NotFound GET /apolices/:numero_apolice/endossos quando não existem endossos retorna 404 e code 404 no JSON" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true" nameIsGenerated="true">
+    <configuration name="endossos_cancelamento_spec" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true" nameIsGenerated="true">
       <module name="segarante-challenge-3" />
       <predefined_log_file enabled="true" id="RUBY_RSPEC" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="" />
@@ -181,73 +205,7 @@
       <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov" ENABLE_BRANCH_COVERAGE="true" ENABLE_FORKED_COVERAGE="true" />
       <EXTENSION ID="org.jetbrains.plugins.ruby.rails.run.RailsRunConfigurationExtension" SCRATCH_USE_RAILS_RUNNER="false" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$MODULE_DIR$/spec/requests/endossos_not_found_spec.rb" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATHS" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="Endossos NotFound GET /apolices/:numero_apolice/endossos quando não existem endossos retorna 404 e code 404 no JSON" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_EXAMPLE_MATCHES" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="LINE_NUMBER_EXAMPLE_IDS" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_ARGS" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_SPEC_RUNNER" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ZEUS" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPRING" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Endossos NotFound" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true" nameIsGenerated="true">
-      <module name="segarante-challenge-3" />
-      <predefined_log_file enabled="true" id="RUBY_RSPEC" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$MODULE_DIR$" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
-      <envs>
-        <env name="RAILS_ENV" value="test" />
-        <env name="JRUBY_OPTS" value="-X+O" />
-      </envs>
-      <EXTENSION ID="BundlerRunConfigurationExtension" BUNDLE_MODE="AUTO" bundleExecEnabled="true" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov" ENABLE_BRANCH_COVERAGE="true" ENABLE_FORKED_COVERAGE="true" />
-      <EXTENSION ID="org.jetbrains.plugins.ruby.rails.run.RailsRunConfigurationExtension" SCRATCH_USE_RAILS_RUNNER="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$MODULE_DIR$/spec/requests/endossos_not_found_spec.rb" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATHS" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="Endossos NotFound" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_EXAMPLE_MATCHES" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="LINE_NUMBER_EXAMPLE_IDS" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_ARGS" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_SPEC_RUNNER" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ZEUS" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPRING" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
-      <method v="2" />
-    </configuration>
-    <configuration name="endossos_cancelamento_apolice_sem_endosso_spec" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true" nameIsGenerated="true">
-      <module name="segarante-challenge-3" />
-      <predefined_log_file enabled="true" id="RUBY_RSPEC" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$MODULE_DIR$" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
-      <envs>
-        <env name="RAILS_ENV" value="test" />
-        <env name="JRUBY_OPTS" value="-X+O" />
-      </envs>
-      <EXTENSION ID="BundlerRunConfigurationExtension" BUNDLE_MODE="AUTO" bundleExecEnabled="true" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov" ENABLE_BRANCH_COVERAGE="true" ENABLE_FORKED_COVERAGE="true" />
-      <EXTENSION ID="org.jetbrains.plugins.ruby.rails.run.RailsRunConfigurationExtension" SCRATCH_USE_RAILS_RUNNER="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$MODULE_DIR$/spec/requests/endossos_cancelamento_apolice_sem_endosso_spec.rb" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$MODULE_DIR$/spec/requests/endossos_cancelamento_spec.rb" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATHS" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
@@ -284,21 +242,37 @@
       <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="LAUNCH_JS" VALUE="false" />
       <method v="2" />
     </configuration>
+    <configuration name="Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="sourceFilePath" value="Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yaml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="docker-compose.yaml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <list>
+      <item itemvalue="Docker.docker-compose.yaml: Compose Deployment" />
+      <item itemvalue="Docker.Dockerfile" />
       <item itemvalue="Rails.segarante-challenge-3" />
-      <item itemvalue="RSpec.Endossos NotFound" />
-      <item itemvalue="RSpec.Endossos NotFound GET /apolices/:numero_apolice/endossos quando não existem endossos retorna 404 e code 404 no JSON" />
+      <item itemvalue="RSpec.Endossos GET /apolices/:numero_apolice/endossos Criar endosso sobre uma apólice [aumento_is_alteracao_vigencia]" />
+      <item itemvalue="RSpec.endossos_cancelamento_spec" />
       <item itemvalue="RSpec.All specs in spec: segarante-challenge-3" />
-      <item itemvalue="RSpec.Apolice sem Endossos GET /apolices/:numero_apolice/endossos Cancelar Endosso, de uma Apolice sem endosso e torna-la BAIXADA" />
-      <item itemvalue="RSpec.endossos_cancelamento_apolice_sem_endosso_spec" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="RSpec.All specs in spec: segarante-challenge-3" />
-        <item itemvalue="RSpec.Endossos NotFound" />
-        <item itemvalue="RSpec.Endossos NotFound GET /apolices/:numero_apolice/endossos quando não existem endossos retorna 404 e code 404 no JSON" />
-        <item itemvalue="RSpec.endossos_cancelamento_apolice_sem_endosso_spec" />
-        <item itemvalue="RSpec.Apolice sem Endossos GET /apolices/:numero_apolice/endossos Cancelar Endosso, de uma Apolice sem endosso e torna-la BAIXADA" />
+        <item itemvalue="Docker.Dockerfile" />
+        <item itemvalue="Docker.docker-compose.yaml: Compose Deployment" />
+        <item itemvalue="RSpec.Endossos GET /apolices/:numero_apolice/endossos Criar endosso sobre uma apólice [aumento_is_alteracao_vigencia]" />
+        <item itemvalue="RSpec.endossos_cancelamento_spec" />
       </list>
     </recent_temporary>
   </component>
@@ -351,7 +325,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/spec/requests/apolices_spec.rb</url>
-          <line>85</line>
+          <line>81</line>
           <properties myBlockOrdinal="-1">
             <option name="block-ordinal" value="-1" />
           </properties>
@@ -359,7 +333,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/spec/requests/endossos_cancelamento_apolice_sem_endosso_spec.rb</url>
-          <line>42</line>
+          <line>41</line>
           <properties myBlockOrdinal="-1">
             <option name="block-ordinal" value="-1" />
           </properties>
@@ -367,35 +341,19 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/spec/requests/endossos_cancelamento_apolice_sem_endosso_spec.rb</url>
-          <line>39</line>
+          <line>38</line>
           <properties myBlockOrdinal="-1">
             <option name="block-ordinal" value="-1" />
           </properties>
           <option name="timeStamp" value="100" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/app/controllers/apolices_controller.rb</url>
-          <line>38</line>
+          <url>file://$PROJECT_DIR$/spec/requests/endossos_cancelamento_spec.rb</url>
+          <line>142</line>
           <properties myBlockOrdinal="-1">
             <option name="block-ordinal" value="-1" />
           </properties>
-          <option name="timeStamp" value="118" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/app/controllers/apolices_controller.rb</url>
-          <line>33</line>
-          <properties myBlockOrdinal="-1">
-            <option name="block-ordinal" value="-1" />
-          </properties>
-          <option name="timeStamp" value="119" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/app/controllers/apolices_controller.rb</url>
-          <line>22</line>
-          <properties myBlockOrdinal="-1">
-            <option name="block-ordinal" value="-1" />
-          </properties>
-          <option name="timeStamp" value="120" />
+          <option name="timeStamp" value="123" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/app/controllers/apolices_controller.rb</url>
@@ -403,7 +361,23 @@
           <properties myBlockOrdinal="-1">
             <option name="block-ordinal" value="-1" />
           </properties>
-          <option name="timeStamp" value="121" />
+          <option name="timeStamp" value="124" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/app/repository/endosso_repository.rb</url>
+          <line>7</line>
+          <properties myBlockOrdinal="-1">
+            <option name="block-ordinal" value="-1" />
+          </properties>
+          <option name="timeStamp" value="126" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/app/repository/endosso_repository.rb</url>
+          <line>17</line>
+          <properties myBlockOrdinal="-1">
+            <option name="block-ordinal" value="-1" />
+          </properties>
+          <option name="timeStamp" value="127" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -411,17 +385,19 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/segarante_challenge_3@Apolices_GET__apolices_Listar_apólices.rcov" NAME="Apolices GET /apolices Listar apólices Coverage Results" MODIFIED="1761502316141" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
     <SUITE FILE_PATH="coverage/segarante_challenge_3@Apolices_GET__apolices__numero_Consulta_por_número_da_apólice.rcov" NAME="Apolices GET /apolices/:numero Consulta por número da apólice Coverage Results" MODIFIED="1761503067200" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
-    <SUITE FILE_PATH="coverage/segarante_challenge_3@endossos_cancelamento_apolice_sem_endosso_spec.rcov" NAME="endossos_cancelamento_apolice_sem_endosso_spec Coverage Results" MODIFIED="1761508450375" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
-    <SUITE FILE_PATH="coverage/segarante_challenge_3@Endossos_GET__apolices__numero_apolice_endossos_Lista_todos_os_endossos_de_uma_apólice.rcov" NAME="Endossos GET /apolices/:numero_apolice/endossos Lista todos os endossos de uma apólice Coverage Results" MODIFIED="1761505454554" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
+    <SUITE FILE_PATH="coverage/segarante_challenge_3@endossos_cancelamento_apolice_sem_endosso_spec.rcov" NAME="endossos_cancelamento_apolice_sem_endosso_spec Coverage Results" MODIFIED="1761675874658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
     <SUITE FILE_PATH="coverage/segarante_challenge_3@endossos_cancelamento_apolice_sem_endosso.rcov" NAME="endossos_cancelamento_apolice_sem_endosso Coverage Results" MODIFIED="1761507884658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
+    <SUITE FILE_PATH="coverage/segarante_challenge_3@Endossos_GET__apolices__numero_apolice_endossos_Lista_todos_os_endossos_de_uma_apólice.rcov" NAME="Endossos GET /apolices/:numero_apolice/endossos Lista todos os endossos de uma apólice Coverage Results" MODIFIED="1761505454554" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
+    <SUITE FILE_PATH="coverage/segarante_challenge_3@apolices_spec.rcov" NAME="apolices_spec Coverage Results" MODIFIED="1761675869076" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
     <SUITE FILE_PATH="coverage/segarante_challenge_3@Endossos_GET__apolices__numero_apolice_endossos.rcov" NAME="Endossos GET /apolices/:numero_apolice/endossos Coverage Results" MODIFIED="1761504699502" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
     <SUITE FILE_PATH="coverage/segarante_challenge_3@Endossos.rcov" NAME="Endossos Coverage Results" MODIFIED="1761504765747" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
     <SUITE FILE_PATH="coverage/segarante_challenge_3@Endossos_GET__apolices__numero_apolice_endossos__1_.rcov" NAME="Endossos GET /apolices/:numero_apolice/endossos (1) Coverage Results" MODIFIED="1761505209130" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
-    <SUITE FILE_PATH="coverage/segarante_challenge_3@Endossos_GET__apolices__numero_apolice_endossos_Criar_endosso_sobre_uma_apólice__aumento_is_alteracao_vigencia_.rcov" NAME="Endossos GET /apolices/:numero_apolice/endossos Criar endosso sobre uma apólice [aumento_is_alteracao_vigencia] Coverage Results" MODIFIED="1761503863978" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
+    <SUITE FILE_PATH="coverage/segarante_challenge_3@Endossos_GET__apolices__numero_apolice_endossos_Criar_endosso_sobre_uma_apólice__aumento_is_alteracao_vigencia_.rcov" NAME="Endossos GET /apolices/:numero_apolice/endossos Criar endosso sobre uma apólice [aumento_is_alteracao_vigencia] Coverage Results" MODIFIED="1761675986355" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
+    <SUITE FILE_PATH="coverage/segarante_challenge_3@endossos_cancelamento_spec.rcov" NAME="endossos_cancelamento_spec Coverage Results" MODIFIED="1761675960305" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
     <SUITE FILE_PATH="coverage/segarante_challenge_3@Endossos_GET__apolices__numero_apolice_endossos_Criar_endosso_sobre_uma_apólice__reducao_is_.rcov" NAME="Endossos GET /apolices/:numero_apolice/endossos Criar endosso sobre uma apólice [reducao_is] Coverage Results" MODIFIED="1761503858514" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
     <SUITE FILE_PATH="coverage/segarante_challenge_3@Endossos_GET__apolices__numero_apolice_endossos_Criar_endosso_sobre_uma_apólice__reducao_is_alteracao_vigencia_.rcov" NAME="Endossos GET /apolices/:numero_apolice/endossos Criar endosso sobre uma apólice [reducao_is_alteracao_vigencia] Coverage Results" MODIFIED="1761503869447" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
-    <SUITE FILE_PATH="coverage/segarante_challenge_3@segarante_challenge_3.rcov" NAME="segarante-challenge-3 Coverage Results" MODIFIED="1761537027866" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
-    <SUITE FILE_PATH="coverage/segarante_challenge_3@All_specs_in_spec__segarante_challenge_3.rcov" NAME="All specs in spec: segarante-challenge-3 Coverage Results" MODIFIED="1761537856429" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
+    <SUITE FILE_PATH="coverage/segarante_challenge_3@segarante_challenge_3.rcov" NAME="segarante-challenge-3 Coverage Results" MODIFIED="1761676275738" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
+    <SUITE FILE_PATH="coverage/segarante_challenge_3@All_specs_in_spec__segarante_challenge_3.rcov" NAME="All specs in spec: segarante-challenge-3 Coverage Results" MODIFIED="1761678159338" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
     <SUITE FILE_PATH="coverage/segarante_challenge_3@Apolices_GET__apolices__numero.rcov" NAME="Apolices GET /apolices/:numero Coverage Results" MODIFIED="1761502965408" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
     <SUITE FILE_PATH="coverage/segarante_challenge_3@Endossos_NotFound_GET__apolices__numero_apolice_endossos_quando_não_existem_endossos_retorna_404_e_code_404_no_JSON.rcov" NAME="Endossos NotFound GET /apolices/:numero_apolice/endossos quando não existem endossos retorna 404 e code 404 no JSON Coverage Results" MODIFIED="1761536761721" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
     <SUITE FILE_PATH="coverage/segarante_challenge_3@Endossos_NotFound.rcov" NAME="Endossos NotFound Coverage Results" MODIFIED="1761536842682" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
@@ -431,7 +407,7 @@
     <SUITE FILE_PATH="coverage/segarante_challenge_3@Endossos_GET__apolices__numero_apolice_endossos__numero_endosso_Consulta_um_endosso_específico.rcov" NAME="Endossos GET /apolices/:numero_apolice/endossos/:numero_endosso Consulta um endosso específico Coverage Results" MODIFIED="1761505375346" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
     <SUITE FILE_PATH="coverage/segarante_challenge_3@Apolice_sem_Endossos.rcov" NAME="Apolice sem Endossos Coverage Results" MODIFIED="1761507917227" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
     <SUITE FILE_PATH="coverage/segarante_challenge_3@Endossos_GET__apolices__numero_apolice_endossos_Criar_endosso_sobre_uma_apólice__aumento_is_.rcov" NAME="Endossos GET /apolices/:numero_apolice/endossos Criar endosso sobre uma apólice [aumento_is] Coverage Results" MODIFIED="1761503854333" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
-    <SUITE FILE_PATH="coverage/segarante_challenge_3@Apolices_POST__apolices_Criar_apólice.rcov" NAME="Apolices POST /apolices Criar apólice Coverage Results" MODIFIED="1761502304138" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
     <SUITE FILE_PATH="coverage/segarante_challenge_3@Apolice_sem_Endossos_GET__apolices__numero_apolice_endossos_Cancelar_Endosso__de_uma_Apolice_sem_endosso_e_torna_la_BAIXADA.rcov" NAME="Apolice sem Endossos GET /apolices/:numero_apolice/endossos Cancelar Endosso, de uma Apolice sem endosso e torna-la BAIXADA Coverage Results" MODIFIED="1761508194412" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
+    <SUITE FILE_PATH="coverage/segarante_challenge_3@Apolices_POST__apolices_Criar_apólice.rcov" NAME="Apolices POST /apolices Criar apólice Coverage Results" MODIFIED="1761675764993" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
   </component>
 </project>

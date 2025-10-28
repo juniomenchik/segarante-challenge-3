@@ -15,8 +15,7 @@ RSpec.describe 'Apolice sem Endossos', type: :request do
           data_emissao: Date.today.to_s,
           inicio_vigencia: (Date.today + 30).to_s,
           fim_vigencia: (Date.today + 60).to_s,
-          importancia_segurada: 1000.01,
-          lmg: 1000.00
+          importancia_segurada: 1000.01
         }
       }
 

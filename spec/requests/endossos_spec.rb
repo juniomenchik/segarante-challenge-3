@@ -15,8 +15,7 @@ RSpec.describe 'Endossos', type: :request do
           data_emissao: Date.today.to_s,
           inicio_vigencia: (Date.today + 30).to_s,
           fim_vigencia: (Date.today + 60).to_s,
-          importancia_segurada: 1000.01,
-          lmg: 1000.00
+          importancia_segurada: 1000.01
         }
       }
 
@@ -41,7 +40,7 @@ RSpec.describe 'Endossos', type: :request do
       expect(body['apolice']['numero']).to eq(numero)
       expect(body['apolice']['importancia_segurada'].to_d).to eq(1000.01.to_d)
       # deve ter aumentado o LMG em 350.00
-      expect(body['apolice']['lmg'].to_d).to eq(1350.00.to_d)
+      expect(body['apolice']['lmg'].to_d).to eq(1350.01.to_d)
       # deve possuir um endosso base + 1 criado.
       expect(body['endossos'][0]['tipo_endosso']).to eq('BASE')
       # deve possuir um endosso aumento_is.
@@ -60,8 +59,7 @@ RSpec.describe 'Endossos', type: :request do
           data_emissao: Date.today.to_s,
           inicio_vigencia: (Date.today + 30).to_s,
           fim_vigencia: (Date.today + 60).to_s,
-          importancia_segurada: 1000.01,
-          lmg: 1000.00
+          importancia_segurada: 1000.01
         }
       }
 
@@ -86,7 +84,7 @@ RSpec.describe 'Endossos', type: :request do
       expect(body['apolice']['numero']).to eq(numero)
       expect(body['apolice']['importancia_segurada'].to_d).to eq(1000.01.to_d)
       # deve ter aumentado o LMG em 350.00
-      expect(body['apolice']['lmg'].to_d).to eq(650.00.to_d)
+      expect(body['apolice']['lmg'].to_d).to eq(650.01.to_d)
       # deve possuir um endosso base + 1 criado.
       expect(body['endossos'][0]['tipo_endosso']).to eq('BASE')
       # deve possuir um endosso reducao_is.
@@ -105,8 +103,7 @@ RSpec.describe 'Endossos', type: :request do
           data_emissao: Date.today.to_s,
           inicio_vigencia: (Date.today + 30).to_s,
           fim_vigencia: (Date.today + 60).to_s,
-          importancia_segurada: 1000.01,
-          lmg: 1000.00
+          importancia_segurada: 1000.01
         }
       }
 
@@ -132,7 +129,7 @@ RSpec.describe 'Endossos', type: :request do
       expect(body['apolice']['numero']).to eq(numero)
       expect(body['apolice']['importancia_segurada'].to_d).to eq(1000.01.to_d)
       # deve ter aumentado o LMG em 350.00
-      expect(body['apolice']['lmg'].to_d).to eq(1350.00.to_d)
+      expect(body['apolice']['lmg'].to_d).to eq(1350.01.to_d)
       # deve possuir um endosso base + 1 criado.
       expect(body['endossos'][0]['tipo_endosso']).to eq('BASE')
       # deve possuir um endosso aumento_is_alteracao_vigencia.
@@ -151,8 +148,7 @@ RSpec.describe 'Endossos', type: :request do
           data_emissao: Date.today.to_s,
           inicio_vigencia: (Date.today + 30).to_s,
           fim_vigencia: (Date.today + 60).to_s,
-          importancia_segurada: 1000.01,
-          lmg: 1000.00
+          importancia_segurada: 1000.01
         }
       }
 
@@ -178,7 +174,7 @@ RSpec.describe 'Endossos', type: :request do
       expect(body['apolice']['numero']).to eq(numero)
       expect(body['apolice']['importancia_segurada'].to_d).to eq(1000.01.to_d)
       # deve ter aumentado o LMG em 350.00
-      expect(body['apolice']['lmg'].to_d).to eq(650.00.to_d)
+      expect(body['apolice']['lmg'].to_d).to eq(650.01.to_d)
       # deve possuir um endosso base + 1 criado.
       expect(body['endossos'][0]['tipo_endosso']).to eq('BASE')
       # deve possuir um endosso reducao_is_alteracao_vigencia.
@@ -197,8 +193,7 @@ RSpec.describe 'Endossos', type: :request do
           data_emissao: Date.today.to_s,
           inicio_vigencia: (Date.today + 30).to_s,
           fim_vigencia: (Date.today + 60).to_s,
-          importancia_segurada: 1000.01,
-          lmg: 1000.00
+          importancia_segurada: 1000.01
         }
       }
 
@@ -235,8 +230,7 @@ RSpec.describe 'Endossos', type: :request do
           data_emissao: Date.today.to_s,
           inicio_vigencia: (Date.today + 30).to_s,
           fim_vigencia: (Date.today + 60).to_s,
-          importancia_segurada: 1000.01,
-          lmg: 1000.00
+          importancia_segurada: 1000.01
         }
       }
 

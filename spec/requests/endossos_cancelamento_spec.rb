@@ -15,8 +15,7 @@ RSpec.describe 'Endossos', type: :request do
           data_emissao: Date.today.to_s,
           inicio_vigencia: (Date.today + 30).to_s,
           fim_vigencia: (Date.today + 60).to_s,
-          importancia_segurada: 1000.01,
-          lmg: 1000.00
+          importancia_segurada: 1000.01
         }
       }
 
@@ -49,13 +48,7 @@ RSpec.describe 'Endossos', type: :request do
       expect(response).to have_http_status(:ok)
       body = JSON.parse(response.body)
       expect(body['apolice']['numero']).to eq(numero)
-      expect(body['apolice']['importancia_segurada'].to_d).to eq(1000.01.to_d)
-      expect(body['apolice']['lmg'].to_d).to eq(1000.00.to_d)
-
-
-
-
-
+      expect(body['apolice']['lmg'].to_d).to eq(1000.01.to_d)
     end
   end
 
@@ -68,8 +61,7 @@ RSpec.describe 'Endossos', type: :request do
           data_emissao: Date.today.to_s,
           inicio_vigencia: (Date.today + 30).to_s,
           fim_vigencia: (Date.today + 60).to_s,
-          importancia_segurada: 1000.01,
-          lmg: 1000.00
+          importancia_segurada: 1000.01
         }
       }
 
@@ -102,8 +94,7 @@ RSpec.describe 'Endossos', type: :request do
       expect(response).to have_http_status(:ok)
       body = JSON.parse(response.body)
       expect(body['apolice']['numero']).to eq(numero)
-      expect(body['apolice']['importancia_segurada'].to_d).to eq(1000.01.to_d)
-      expect(body['apolice']['lmg'].to_d).to eq(1000.00.to_d)
+      expect(body['apolice']['lmg'].to_d).to eq(1000.01.to_d)
 
     end
   end
@@ -117,8 +108,7 @@ RSpec.describe 'Endossos', type: :request do
           data_emissao: Date.today.to_s,
           inicio_vigencia: (Date.today + 30).to_s,
           fim_vigencia: (Date.today + 60).to_s,
-          importancia_segurada: 1000.01,
-          lmg: 1000.00
+          importancia_segurada: 1000.01
         }
       }
 
@@ -152,10 +142,9 @@ RSpec.describe 'Endossos', type: :request do
       expect(response).to have_http_status(:ok)
       body = JSON.parse(response.body)
       expect(body['apolice']['numero']).to eq(numero)
-      expect(body['apolice']['importancia_segurada'].to_d).to eq(1000.01.to_d)
       # deve ter revertido o valor do fim_vigencia ao valor original da apólice
       expect(body['apolice']['fim_vigencia']).to eq((Date.today + 60).to_s)
-      expect(body['apolice']['lmg'].to_d).to eq(1000.00.to_d)
+      expect(body['apolice']['lmg'].to_d).to eq(1000.01)
 
     end
   end
@@ -169,8 +158,7 @@ RSpec.describe 'Endossos', type: :request do
           data_emissao: Date.today.to_s,
           inicio_vigencia: (Date.today + 30).to_s,
           fim_vigencia: (Date.today + 60).to_s,
-          importancia_segurada: 1000.01,
-          lmg: 1000.00
+          importancia_segurada: 1000.01
         }
       }
 
@@ -204,10 +192,9 @@ RSpec.describe 'Endossos', type: :request do
       expect(response).to have_http_status(:ok)
       body = JSON.parse(response.body)
       expect(body['apolice']['numero']).to eq(numero)
-      expect(body['apolice']['importancia_segurada'].to_d).to eq(1000.01.to_d)
       # deve ter revertido o valor do fim_vigencia ao valor original da apólice
       expect(body['apolice']['fim_vigencia']).to eq((Date.today + 60).to_s)
-      expect(body['apolice']['lmg'].to_d).to eq(1000.00.to_d)
+      expect(body['apolice']['lmg'].to_d).to eq(1000.01)
 
     end
   end

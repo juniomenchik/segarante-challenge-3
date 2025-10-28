@@ -12,7 +12,8 @@ class ApoliceService
       inicio_vigencia: apolice_dto[:inicio_vigencia],
       fim_vigencia: apolice_dto[:fim_vigencia],
       importancia_segurada: apolice_dto[:importancia_segurada],
-      lmg: apolice_dto[:lmg],
+      lmg: apolice_dto[:importancia_segurada],
+      observacao: apolice_dto[:observacao],
       status: "ATIVA"
     )
 

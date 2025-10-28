@@ -10,10 +10,12 @@ module Vo
       reducao_is_alteracao_vigencia: "reducao_is_alteracao_vigencia",
       alteracao_vigencia: "alteracao_vigencia",
       cancelamento: "cancelamento",
-      base: "BASE"
+      base: "BASE",
+      neutro: "neutro"
     }.freeze
 
     attr_reader :numero,
+                :apolice,
                 :tb_apolice_numero,
                 :tipo_endosso,
                 :data_emissao,
@@ -21,18 +23,24 @@ module Vo
                 :fim_vigencia,
                 :importancia_segurada,
                 :lmg,
+                :observacao,
                 :created_at
 
     def initialize(
+      apolice:,
       numero:,
       tb_apolice_numero:,
       tipo_endosso:,
       data_emissao:,
       fim_vigencia: nil,
-      importancia_segurada: nil
+      importancia_segurada: nil,
+      observacao:
     )
       errors = []
 
+      errors << { campo: "apolice", motivo: "apolice é obrigatório" } if numero.nil?
+      errors << { campo: "data_emissao", motivo: "data_emissao é obrigatória" } if data_emissao.nil?
+      errors << { campo: "tb_apolice_numero", motivo: "tb_apolice_numero é obrigatória" } if data_emissao.nil?
       errors << { campo: "data_emissao", motivo: "data_emissao é obrigatória" } if data_emissao.nil?
 
       if importancia_segurada
@@ -54,7 +62,10 @@ module Vo
       raise ArgumentError, { errors: errors }.to_json if errors.any?
 
       tipo = determinar_tipo_endosso(
-        fim_vigencia,importancia_segurada
+        apolice,
+        importancia_segurada,
+        fim_vigencia,
+        observacao
       )
 
       @numero = numero
@@ -65,27 +76,43 @@ module Vo
       @lmg = lmg
       @created_at = Time.now
       @tipo_endosso = tipo_endosso || tipo
+      @observacao = observacao
     end
 
     private
 
-    def determinar_tipo_endosso(fim_vigencia,importancia_segurada)
+    def determinar_tipo_endosso(apolice,
+                                importancia_segurada,
+                                fim_vigencia,
+                                observacao)
 
-      valor = importancia_segurada.to_f
+      fv_atual = apolice.fim_vigencia
+      ob_atual = apolice.observacao
 
-      if fim_vigencia
-        if importancia_segurada
+      if importancia_segurada != nil && importancia_segurada > 0
 
-          return TIPOS[:aumento_is_alteracao_vigencia] if valor > 0
-          return TIPOS[:reducao_is_alteracao_vigencia] if valor < 0
+        if fim_vigencia != nil && fim_vigencia != fv_atual
+          return TIPOS[:aumento_is_alteracao_vigencia]
         end
+        return TIPOS[:aumento_is]
+      elsif importancia_segurada != nil && importancia_segurada < 0
+        if fim_vigencia != nil && fim_vigencia != fv_atual
+          return TIPOS[:reducao_is_alteracao_vigencia]
+        end
+        return TIPOS[:reducao_is]
+      end
+
+      if fim_vigencia != nil && fim_vigencia != fv_atual
         return TIPOS[:alteracao_vigencia]
-      else
-        return TIPOS[:aumento_is] if valor > 0
-        return TIPOS[:reducao_is] if valor < 0
+      end
+
+      if observacao != nil
+        return TIPOS[:neutro]
       end
 
       TIPOS[:base]
     end
   end
+
 end
+

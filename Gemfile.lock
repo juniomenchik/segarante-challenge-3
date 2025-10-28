@@ -374,7 +374,8 @@ DEPENDENCIES
   bootsnap
   brakeman
   capybara
-  database_cleaner-active_record
+  database_cleaner-active_record (= 2.2.2)
+  database_cleaner-core (= 2.0.1)
   debug
   importmap-rails
   jbuilder
