@@ -13,8 +13,7 @@ services:
       postgres:
         condition: service_healthy
     environment:
-      RAILS_ENV: development
-      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/postgres
+      RAILS_ENV: production
     networks:
       - internal-network
 
