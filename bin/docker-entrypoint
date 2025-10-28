@@ -6,9 +6,30 @@ if [ -z "${LD_PRELOAD+x}" ]; then
     export LD_PRELOAD
 fi
 
-# If running the rails server then create or migrate existing database
-if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
-  ./bin/rails db:prepare
+# Ensure tmp/pids directory exists (may be overridden by volume mount)
+mkdir -p tmp/pids
+
+# Remove stale server.pid if the recorded process is not running
+if [ -f tmp/pids/server.pid ]; then
+  PID=$(cat tmp/pids/server.pid || true)
+  if [ -n "$PID" ] && ! ps -p "$PID" > /dev/null 2>&1; then
+    echo "Removing stale tmp/pids/server.pid (PID $PID not running)"
+    rm -f tmp/pids/server.pid
+  fi
 fi
 
-exec "${@}"
+# If command includes rails server, prepare (create/migrate) database.
+# Works whether using: bundle exec rails server ... OR bin/rails server ...
+if echo "$*" | grep -q "rails" && echo "$*" | grep -q "server"; then
+  echo "Running db:prepare before starting Rails server"
+  # db:prepare handles create + migrate + schema load if needed
+  bundle exec rails db:prepare || ./bin/rails db:prepare
+fi
+
+# Optional automatic reset if ALWAYS_RESET_DB=1 (not default)
+if [ "${ALWAYS_RESET_DB}" = "1" ]; then
+  echo "ALWAYS_RESET_DB=1 -> Performing full db reset"
+  bundle exec rails db:drop db:create db:migrate || ./bin/rails db:drop db:create db:migrate
+fi
+
+exec "$@"

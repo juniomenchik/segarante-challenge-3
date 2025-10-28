@@ -11,7 +11,8 @@ module Vo
       alteracao_vigencia: "alteracao_vigencia",
       cancelamento: "cancelamento",
       base: "BASE",
-      neutro: "neutro"
+      neutro: "neutro",
+      invalido: "invalido"
     }.freeze
 
     attr_reader :numero,
@@ -68,6 +69,10 @@ module Vo
         observacao
       )
 
+      if tipo == TIPOS[:invalido]
+        raise ValidationError.new("Endosso inválido: não há alterações válidas para criar o endosso")
+      end
+
       @numero = numero
       @tb_apolice_numero = tb_apolice_numero
       @data_emissao = data_emissao
@@ -102,15 +107,15 @@ module Vo
         return TIPOS[:reducao_is]
       end
 
-      if fim_vigencia != nil && fim_vigencia != fv_atual
+      if fim_vigencia != nil && fim_vigencia != fv_atual.to_s
         return TIPOS[:alteracao_vigencia]
       end
 
-      if observacao != nil
+      if observacao != nil && observacao != ob_atual
         return TIPOS[:neutro]
       end
 
-      TIPOS[:base]
+      TIPOS[:invalido]
     end
   end
 

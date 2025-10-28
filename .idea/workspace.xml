@@ -4,30 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4a5d11b-3059-4238-a68a-13eb30e16bbe" name="Changes" comment="[master] Melhoria no fluxo de exceptions.">
+    <list default="true" id="a4a5d11b-3059-4238-a68a-13eb30e16bbe" name="Changes" comment="[master] Melhoria no fluxo.&#10;adicao de neutra, observacao.&#10;E conserto do compose.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HELP.md" beforeDir="false" afterPath="$PROJECT_DIR$/HELP.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/apolices_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/apolices_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/vo/apolice_vo.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/vo/apolice_vo.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/dto/apolice_dto.rb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/dto/endosso_dto.rb" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/vo/endosso_vo.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/vo/endosso_vo.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/repository/apolice_repository.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/apolice_repository.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/repository/endosso_repository.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/endosso_repository.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/apolice_service.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/apolice_service.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/endosso_service.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/endosso_service.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/exception_service.rb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/docker-entrypoint" beforeDir="false" afterPath="$PROJECT_DIR$/bin/docker-entrypoint" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/database.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/migrate/20251024210125_create_tb_apolices.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20251024210125_create_tb_apolices.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/migrate/20251024210152_create_tb_endossos.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20251024210152_create_tb_endossos.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/schema.rb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/postgres_image/docker-compose.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spec/requests/apolices_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/requests/apolices_spec.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spec/requests/endossos_cancelamento_apolice_sem_endosso_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/requests/endossos_cancelamento_apolice_sem_endosso_spec.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spec/requests/endossos_cancelamento_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/requests/endossos_cancelamento_spec.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spec/requests/endossos_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/requests/endossos_spec.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spec/spec_helper.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/spec_helper.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -318,7 +304,8 @@
     <MESSAGE value="[master] Ultima atualização da doc, e do postman." />
     <MESSAGE value="[master] Iniciando pequena atualização sobre Exceptions." />
     <MESSAGE value="[master] Melhoria no fluxo de exceptions." />
-    <option name="LAST_COMMIT_MESSAGE" value="[master] Melhoria no fluxo de exceptions." />
+    <MESSAGE value="[master] Melhoria no fluxo.&#10;adicao de neutra, observacao.&#10;E conserto do compose." />
+    <option name="LAST_COMMIT_MESSAGE" value="[master] Melhoria no fluxo.&#10;adicao de neutra, observacao.&#10;E conserto do compose." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -355,30 +342,6 @@
           </properties>
           <option name="timeStamp" value="123" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/app/controllers/apolices_controller.rb</url>
-          <line>27</line>
-          <properties myBlockOrdinal="-1">
-            <option name="block-ordinal" value="-1" />
-          </properties>
-          <option name="timeStamp" value="124" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/app/repository/endosso_repository.rb</url>
-          <line>7</line>
-          <properties myBlockOrdinal="-1">
-            <option name="block-ordinal" value="-1" />
-          </properties>
-          <option name="timeStamp" value="126" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/app/repository/endosso_repository.rb</url>
-          <line>17</line>
-          <properties myBlockOrdinal="-1">
-            <option name="block-ordinal" value="-1" />
-          </properties>
-          <option name="timeStamp" value="127" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
@@ -396,8 +359,8 @@
     <SUITE FILE_PATH="coverage/segarante_challenge_3@endossos_cancelamento_spec.rcov" NAME="endossos_cancelamento_spec Coverage Results" MODIFIED="1761675960305" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
     <SUITE FILE_PATH="coverage/segarante_challenge_3@Endossos_GET__apolices__numero_apolice_endossos_Criar_endosso_sobre_uma_apólice__reducao_is_.rcov" NAME="Endossos GET /apolices/:numero_apolice/endossos Criar endosso sobre uma apólice [reducao_is] Coverage Results" MODIFIED="1761503858514" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
     <SUITE FILE_PATH="coverage/segarante_challenge_3@Endossos_GET__apolices__numero_apolice_endossos_Criar_endosso_sobre_uma_apólice__reducao_is_alteracao_vigencia_.rcov" NAME="Endossos GET /apolices/:numero_apolice/endossos Criar endosso sobre uma apólice [reducao_is_alteracao_vigencia] Coverage Results" MODIFIED="1761503869447" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
-    <SUITE FILE_PATH="coverage/segarante_challenge_3@segarante_challenge_3.rcov" NAME="segarante-challenge-3 Coverage Results" MODIFIED="1761676275738" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
-    <SUITE FILE_PATH="coverage/segarante_challenge_3@All_specs_in_spec__segarante_challenge_3.rcov" NAME="All specs in spec: segarante-challenge-3 Coverage Results" MODIFIED="1761678159338" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
+    <SUITE FILE_PATH="coverage/segarante_challenge_3@segarante_challenge_3.rcov" NAME="segarante-challenge-3 Coverage Results" MODIFIED="1761682137203" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
+    <SUITE FILE_PATH="coverage/segarante_challenge_3@All_specs_in_spec__segarante_challenge_3.rcov" NAME="All specs in spec: segarante-challenge-3 Coverage Results" MODIFIED="1761682361685" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
     <SUITE FILE_PATH="coverage/segarante_challenge_3@Apolices_GET__apolices__numero.rcov" NAME="Apolices GET /apolices/:numero Coverage Results" MODIFIED="1761502965408" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
     <SUITE FILE_PATH="coverage/segarante_challenge_3@Endossos_NotFound_GET__apolices__numero_apolice_endossos_quando_não_existem_endossos_retorna_404_e_code_404_no_JSON.rcov" NAME="Endossos NotFound GET /apolices/:numero_apolice/endossos quando não existem endossos retorna 404 e code 404 no JSON Coverage Results" MODIFIED="1761536761721" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />
     <SUITE FILE_PATH="coverage/segarante_challenge_3@Endossos_NotFound.rcov" NAME="Endossos NotFound Coverage Results" MODIFIED="1761536842682" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="segarante-challenge-3" />

@@ -19,8 +19,8 @@ RUN bundle install
 COPY . .
 
 # Set environment variables directly in the Dockerfile
-ENV RAILS_ENV=development \
-    RACK_ENV=development \
+ENV RAILS_ENV=production \
+    RACK_ENV=production \
     PORT=3000
 
 # Create necessary directories
@@ -29,5 +29,8 @@ RUN mkdir -p tmp/pids
 # Expose the port your app runs on
 EXPOSE 3000
 
-# Define the command to run your Rails application
-CMD bundle exec rails db:create db:schema:load && bundle exec rails server -b 0.0.0.0
+# Set entrypoint script for PID cleanup and DB preparation
+ENTRYPOINT ["/app/bin/docker-entrypoint"]
+
+# Default command runs the Rails server (entrypoint will prepare DB)
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]

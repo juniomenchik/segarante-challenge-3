@@ -5,3 +5,7 @@ Após criar apólice.
         -  com a observacao exatamente igual.  Deve ainda sim ser neutro ? mesmo sem ter mudado nada?
 
 
+
+docker-compose down -v
+
+docker compose up --build -d
